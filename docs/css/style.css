@@ -3,9 +3,10 @@ Author(s) : Balraj Singh Bains, Mark Ericson Santos
 Date : 12/01/2017
 */
 
-body{
-    margin-left : 20px;
-    margin-right : 20px;
+/* Base styles */
+
+body {
+    margin: 0;
 }
 
 div{
@@ -28,17 +29,6 @@ dd {
     font-size: 90%;
 }
 
-/* Media queries to change style for larger screens */
-@media screen and (min-width: 400px) {
-
-form.login-form{
-    width: 50%;
-    float: left;
-}
-
-form.signup-form{
-    width:50%;
-    float:right;
-}
-
+div.main{
+    margin: 10px 20px 10px 20px
 }
