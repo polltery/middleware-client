@@ -10,7 +10,7 @@ Front-end for Network application coursework (Middleware services). The front-en
 
 ## Making changes
 
-If you would like make changes or add features then do the following, or simply add a new issue via **issue tracker**.
+If you would like to make changes or add features then do the following, or simply add a new issue via **issue tracker**.
 
 1. Fork repo
 2. Send a pull request
