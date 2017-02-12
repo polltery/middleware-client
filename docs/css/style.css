@@ -1,0 +1,13 @@
+/* 
+Author(s) : Balraj Singh Bains, Mark Ericson Santos
+Date : 12/01/2017
+*/
+
+/* Give margins to all div elements */
+div{
+    margin: 10px 5px 10px 5px;
+}
+
+form label {
+    margin-right: 20px
+}
