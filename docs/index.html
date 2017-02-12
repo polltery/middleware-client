@@ -9,52 +9,27 @@ Created on : 12/01/2017
         <title>Middleware services: Overview</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        <!-- Angular Material style sheet -->
+        <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+        
+        <!-- stylesheet for custom styles -->
         <link href="css/style.css" rel="stylesheet">
+
     </head>
-    <body>
-        <h1>Middleware services interface</h1>
-        <hr/>
+    <body data-ng-app="network-application">
 
-        <!--About-->
-        <div>
-            <h3>About</h3>
-            <p>Description of the website goes here</p>
-        </div>
+        <!--Main view, all content is loaded here-->
+        <div class="main" data-ng-view></div>
 
-        <!--Group members -->
-        <div>
-            <h3>Group members</h3>
-            <dl>
-                <dt>Azeem</dt>
-                <dd>Azeem description</dd>
-                <dt>Apeqsha</dt>
-                <dd>Apeqsha description</dd>
-                <dt>Balraj Singh Bains</dt>
-                <dd>H00178271, bsb32@hw.ac.uk</dd>
-                <dt>Mark</dt>
-                <dd>Mark description</dd>
-            </dl>
-        </div>
-
-        <!-- Pages -->
-        <div>
-        <h3>Pages</h3>
-            <dl>
-                <dt><a href="login.html">Login</a></dt>
-                <dd>Allows a user to login or signup for the application</dd>
-                <dt><a href="profile.html">Profile</a></dt>
-                <dd>Users can view their feeds from their social media accounts, interact with it and post content</dd>
-            </dl>
-        </div>
-
-        <!-- External files -->
-        <div>
-        <h3>External files/libraries</h3>
-            <dl>
-                <dt><a href="#">External file link</a></dt>
-                <dd>External file description</dd>
-            </dl>
-        </div>
-
+        <!-- Angular Material requires Angular.js Libraries -->
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.min.js"></script>
+        <!-- Angular Material Library -->
+        <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+        <script src="js/index.js"></script>
     </body>
 </html>
