@@ -19,6 +19,16 @@ Each file contains authors in the comment.
 
 If you work with a file, then please **add your name to the authors** on the file.
 
+## External files
+
+External files are their purpose
+
+- [Angular JS](https://angularjs.org/) : JavaScript Framework for making web apps
+- [Angular Material UI components](https://material.angularjs.org/) : UI components for themeing
+- [Roboto Font](https://fonts.google.com/specimen/Roboto) : Font family for theme
+
+Note: All external files must be linked to a CDN, and not hosted.
+
 ## Contributors
 - Azeem
 - Apeqsha
