@@ -1,6 +1,6 @@
 <!--
 Author(s) : Balraj Singh Bains, Mark Ericson Santos
-Date : 12/01/2017
+Created on : 12/01/2017
 -->
 
 <!DOCTYPE html>
@@ -10,6 +10,7 @@ Date : 12/01/2017
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="css/style.css" rel="stylesheet">
+        <script src="js/login.js"></script>
     </head>
     <body>
 
@@ -23,13 +24,13 @@ Date : 12/01/2017
             <!--Username input-->
             <div>
                 <label for="login-username">Username</label>  
-                <input id="login-username" name="login-username" type="text" placeholder="username" pattern="" required/> 
+                <input id="login-username" name="login-username" type="text" placeholder="username" pattern="[A-Za-z]" maxlength="25" required/> 
             </div>
             
             <!-- Password input-->
             <div>
                 <label for="login-password">Password</label>
-                <input id="login-password" name="login-password" type="password" placeholder="password" required/>
+                <input id="login-password" name="login-password" type="password" placeholder="password" maxlength="25" required/>
             </div>
             
             <!-- login button -->
