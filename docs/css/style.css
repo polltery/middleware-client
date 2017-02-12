@@ -3,11 +3,27 @@ Author(s) : Balraj Singh Bains, Mark Ericson Santos
 Date : 12/01/2017
 */
 
-/* Give margins to all div elements */
+body{
+    margin-left : 20px;
+    margin-right : 20px;
+}
+
 div{
     margin: 10px 5px 10px 5px;
 }
 
 form label {
     margin-right: 20px
+}
+
+dt {
+    margin: 10px;
+    margin-bottom: 5px;
+    font-size: 110%;
+}
+
+dd {
+    margin-bottom: 20px;
+    margin-left:10px;
+    font-size: 90%;
 }
