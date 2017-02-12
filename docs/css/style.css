@@ -27,3 +27,18 @@ dd {
     margin-left:10px;
     font-size: 90%;
 }
+
+/* Media queries to change style for larger screens */
+@media screen and (min-width: 400px) {
+
+form.login-form{
+    width: 50%;
+    float: left;
+}
+
+form.signup-form{
+    width:50%;
+    float:right;
+}
+
+}
