@@ -7,7 +7,7 @@ Front-end for Network application coursework (Middleware services). The front-en
 
 1. Install repo
 
-``` git clone {repo-name}```
+``` git clone https://github.com/polltery/middleware-frontend.git```
 
 2. Run it on any server
 
