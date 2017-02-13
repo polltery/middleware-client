@@ -5,12 +5,8 @@ Date : 12/01/2017
 
 /* Base styles */
 
-div{
-    margin: 10px 5px 10px 5px;
-}
-
-form label {
-    margin-right: 20px
+body {
+    padding-top : 50px;
 }
 
 dt {

@@ -3,52 +3,66 @@ Author(s) : Balraj Singh Bains, Mark Ericson Santos
 Created on : 12/01/2017
 -->
 
-<!--define controller-->
-<div data-ng-controller="overview-controller">
+<!-- Navbar -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="" data-ng-click="changeView('')">Overview</a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+        </ul>
+    </div><!--/.nav-collapse -->
+    </div>
+</nav>
 
 <!--title-->
-<h1>Middleware services interface</h1>
-<hr/>
+<div class="jumbotron container-fluid">
+    <div class="container">
+        <h1>Middleware services interface</h1>
+    </div>
+</div>
+
+<!--define controller-->
+<div class="container" data-ng-controller="overview-controller">
 
 <!--About-->
-<div id="about">
-    <h3>About</h3>
-    <p>Description of the website goes here</p>
-</div>
+<h1 class="page-header" id="about">About</h1>
+<p>Description of the website goes here</p>
 
 <!--Group members -->
-<div id="group-members">
-    <h3>Group members</h3>
-    <dl>
-        <dt>Azeem</dt>
-        <dd>Azeem description</dd>
-        <dt>Apeqsha</dt>
-        <dd>Apeqsha description</dd>
-        <dt>Balraj Singh Bains</dt>
-        <dd>H00178271, bsb32@hw.ac.uk</dd>
-        <dt>Mark</dt>
-        <dd>Mark description</dd>
-    </dl>
-</div>
+<h1 class="page-header" id="group-memebers">Group Members</h1>
+<dl class="list-group">
+    <dt>Azeem</dt>
+    <dd>Azeem description</dd>
+    <dt>Apeqsha</dt>
+    <dd>Apeqsha description</dd>
+    <dt>Balraj Singh Bains</dt>
+    <dd>H00178271, bsb32@hw.ac.uk</dd>
+    <dt>Mark</dt>
+    <dd>Mark description</dd>
+</dl>
 
 <!-- Pages -->
-<div id="pages">
-<h3>Pages</h3>
-    <dl>
-        <dt><a data-ng-click="changeView('login')" href="">Login</a></dt>
-        <dd>Allows a user to login or signup for the application</dd>
-        <dt><a href="#">Profile</a></dt>
-        <dd>Users can view their feeds from their social media accounts, interact with it and post content</dd>
-    </dl>
-</div>
+<h1 class="page-header" id="pages">Pages</h1>
+<dl>
+    <dt><a data-ng-click="changeView('login')" href="">Login</a></dt>
+    <dd>Allows a user to login or signup for the application</dd>
+    <dt><a href="#">Profile</a></dt>
+    <dd>Users can view their feeds from their social media accounts, interact with it and post content</dd>
+</dl>
 
 <!-- External files -->
-<div id="external-files">
-<h3>External files/libraries</h3>
-    <dl>
-        <dt><a href="#">External file link</a></dt>
-        <dd>External file description</dd>
-    </dl>
-</div>
+<h1 class="page-header" id="external-files">External Files</h1>
+<dl>
+    <dt><a href="#">External file link</a></dt>
+    <dd>External file description</dd>
+</dl>
 
 </div>
