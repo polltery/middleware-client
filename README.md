@@ -24,8 +24,9 @@ If you work with a file, then please **add your name to the authors** on the fil
 External files are their purpose
 
 - [Angular JS](https://angularjs.org/) : JavaScript Framework for making web apps
-- [Angular Material UI components](https://material.angularjs.org/) : UI components for themeing
 - [Roboto Font](https://fonts.google.com/specimen/Roboto) : Font family for theme
+- [Bootstrap 3](http://getbootstrap.com/) : CSS Library for UI components
+- [jQuery](https://jquery.com/) : JavaScript library (dependency for boostrap)
 
 Note: All external files must be linked to a CDN, and not hosted.
 
