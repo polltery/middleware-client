@@ -23,3 +23,9 @@ app.controller('overview-controller', function($scope, $location){
         $location.path(view);
     };
 });
+
+app.controller('login-controller', function($scope, $location){
+    $scope.changeView = function(view){
+        $location.path(view)
+    };
+});

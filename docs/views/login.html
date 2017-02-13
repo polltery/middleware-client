@@ -3,65 +3,82 @@ Author(s) : Balraj Singh Bains, Mark Ericson Santos
 Created on : 12/01/2017
 -->
 
+<!--Initialise controller-->
+<div class="container" data-ng-controller="login-controller">
+
+<!--Breadcrumbs-->
+<ol class="breadcrumb">
+  <li><a href="" data-ng-click="changeView('/')">Overview</a></li>
+  <li class="active">Login</li>
+</ol>
+
 <!-- Login form -->
-<form name="login-form" class="login-form">
-<fieldset>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Login</h3>
+  </div>
+  <div class="panel-body">
+    <form name="login-form" class="login-form">
+    <fieldset>
 
-    <!-- Form Name -->
-    <legend>Login</legend>
+        <!--Username input-->
+        <div class="form-group">
+            <label for="login-username">Username</label>  
+            <input class="form-control" id="login-username" name="login-username" type="text" placeholder="username" pattern="[A-Za-z]" maxlength="25" required/> 
+        </div>
+        
+        <!-- Password input-->
+        <div class="form-group">
+            <label for="login-password">Password</label>
+            <input class="form-control" id="login-password" name="login-password" type="password" placeholder="password" maxlength="25" required/>
+        </div>
+        
+        <!-- login button -->
+        <button class="btn btn-default" type="submit" id="login-submit" name="login-submit">Login</button>
 
-    <!--Username input-->
-    <div>
-        <label for="login-username">Username</label>  
-        <input id="login-username" name="login-username" type="text" placeholder="username" pattern="[A-Za-z]" maxlength="25" required/> 
-    </div>
-    
-    <!-- Password input-->
-    <div>
-        <label for="login-password">Password</label>
-        <input id="login-password" name="login-password" type="password" placeholder="password" maxlength="25" required/>
-    </div>
-    
-    <!-- login button -->
-    <div>
-        <label for="login-submit">Login</label>
-        <button id="login-submit" name="login-submit">Login</button>
-    </div>
-
-</fieldset>
-</form>
+    </fieldset>
+    </form>
+  </div>
+</div>
 <!--./Login form-->
 
 <!-- Signup form -->
-<form name="signup-form" class="signup-form">
-<fieldset>
-
-    <!-- Form Name -->
-    <legend>Sign-up</legend>
-
-    <!--Username input-->
-    <div>
-        <label for="signup-username">Username</label>  
-        <input id="signup-username" name="signup-username" type="text" placeholder="username" pattern="[A-Za-z]" maxlength="25" required/> 
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title">Sign-up</h3>
     </div>
-    
-    <!-- Password input-->
-    <div>
-        <label for="signup-password">Password</label>
-        <input id="signup-password" name="signup-password" type="password" placeholder="password" maxlength="25" required/>
-    </div>
-    
-    <!-- signup button -->
-    <div>
-        <label for="signup-submit">Signup</label>
-        <button id="signup-submit" name="signup-submit">Signup</button>
-    </div>
+    <div class="panel-body">
+        <form name="signup-form" class="signup-form">
+            <fieldset>
 
-</fieldset>
-</form>
+                <!-- Form Name -->
+                <legend>Sign-up</legend>
+
+                <!--Username input-->
+                <div class="form-group">
+                    <label for="signup-username">Username</label>
+                    <input class="form-control" id="signup-username" name="signup-username" type="text" placeholder="username" pattern="[A-Za-z]" maxlength="25" required/>
+                </div>
+
+                <!-- Password input-->
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input class="form-control" id="signup-password" name="signup-password" type="password" placeholder="password" maxlength="25" required/>
+                </div>
+
+                <!-- signup button -->
+                <button class="btn btn-default" type="submit" id="signup-submit" name="signup-submit">Signup</button>
+
+            </fieldset>
+        </form>
+    </div>
+</div>
 <!--./Login form-->
 
 <!-- Extras -->
 <div>
-    <a href="index.html">Return to overview page</a>
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    <a href="" data-ng-click="changeView('/')">Return to overview page</a>
+</div>
+
 </div>
