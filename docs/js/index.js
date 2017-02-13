@@ -59,8 +59,12 @@ app.controller('login-controller', function($scope, $location, $rootScope){
 });
 
 app.controller('profile-controller', function($scope){
-    $scope.username = "username";
-        $scope.changeView = function(view){
+
+    // user variables
+    $scope.username = "passionateCat243";
+    $scope.description = "I am a very passionate cat. When I am not passionate I meow.";
+    
+    $scope.changeView = function(view){
         if(view === '/'){
             $rootScope.isOverview = true;
         }else{
