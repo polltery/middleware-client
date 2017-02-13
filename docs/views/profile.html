@@ -1,0 +1,38 @@
+<!--
+Author(s) : Balraj Singh Bains
+Created on : 13/01/2017
+-->
+
+<!--Initialise controller-->
+<div data-ng-controller="profile-controller">
+
+<!--Profile info-->
+<div class="jumbotron">
+    <!--Breadcrumbs-->
+    <ol class="breadcrumb">
+    <li><a href="" data-ng-click="changeView('/')">Overview</a></li>
+    <li class="active">Profile</li>
+    </ol>
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-xs-4 col-md-4"></div>
+            <div class="col-xs-4 col-md-4">
+                <a href="#" class="thumbnail">
+                <img src="http://d39kbiy71leyho.cloudfront.net/wp-content/uploads/2016/05/09170020/cats-politics-TN.jpg" alt="Cat picture">
+                </a>
+            </div>
+        </div>
+        <h3>Hello, {{username}}</h3>
+        <hr/>
+        <button type="button" class="btn btn-info">
+        <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>Settings</button>
+    </div>
+</div>
+
+<!--main container-->
+<div class="container">
+
+</div>
+<!--./main container-->
+
+</div>

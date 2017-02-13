@@ -25,13 +25,24 @@ Created on : 12/01/2017
         <!--Main view, all content is loaded here-->
         <div data-ng-view></div>
 
+        <!--Controller-->
+        <div data-ng-controller="index-controller">
+
         <!--footer-->
         <footer class="jumbotron">
             <div class="container">
                 <p>Website made for coursework purpose only.</p>
                 <p>Network Applications, Heriot-Watt University</p>
+                <hr class="bg-primary">
+                <div data-ng-if="!isOverview">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <a href="" data-ng-click="changeView('/')">Return to overview page</a>
+                </div>
             </div>
         </footer>
+
+        </div>
+        <!--./controller-->
 
         <!--JQuery-->
         <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
