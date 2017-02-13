@@ -18,6 +18,10 @@ app.config(function($routeProvider) {
     
     .when("/profile", {
         templateUrl : "views/profile.html"
+    })
+    
+    .when("/settings", {
+        templateUrl : "views/settings.html"
     });
 
 });
@@ -60,6 +64,21 @@ app.controller('login-controller', function($scope, $location, $rootScope){
 
 app.controller('profile-controller', function($scope, $rootScope, $location){
 
+    // user variables
+    $scope.username = "passionateCat243";
+    $scope.description = "I am a very passionate cat. When I am not passionate I meow.";
+    
+    $scope.changeView = function(view){
+        if(view === '/'){
+            $rootScope.isOverview = true;
+        }else{
+            $rootScope.isOverview = false;
+        }
+        $location.path(view);
+    };
+});
+
+app.controller('settings-controller', function($scope, $rootScope, $location){
     // user variables
     $scope.username = "passionateCat243";
     $scope.description = "I am a very passionate cat. When I am not passionate I meow.";

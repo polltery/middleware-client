@@ -8,11 +8,6 @@ Created on : 13/01/2017
 
 <!--Profile info-->
 <div class="jumbotron">
-    <!--Breadcrumbs-->
-    <ol class="breadcrumb">
-    <li><a href="" data-ng-click="changeView('/')">Overview</a></li>
-    <li class="active">Profile</li>
-    </ol>
     <div class="container text-center">
         <div class="row">
             <div class="col-xs-4 col-md-4"></div>
@@ -25,7 +20,7 @@ Created on : 13/01/2017
         <h3>Hello, {{username}}</h3>
         <p>{{description}}</p>
         <hr/>
-        <button type="button" class="btn btn-info">
+        <button type="button" class="btn btn-info" data-ng-click="changeView('/settings')">
         <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>Settings</button>
     </div>
 </div>
@@ -59,6 +54,9 @@ Created on : 13/01/2017
       </div>
 </div>
 
+<div class="text-center">
+    <a href=""><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>&nbsp;Show more</a>
+</div>
 
 </div>
 <!--./main container-->
