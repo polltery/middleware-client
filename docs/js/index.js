@@ -3,7 +3,7 @@ Author(s) : Balraj Singh Bains
 Date : 12/01/2017
 */
 
-var app = angular.module('network-application', ['ngMaterial','ngRoute']);
+var app = angular.module('network-application', ['ngRoute']);
 
 app.config(function($routeProvider) {
 
