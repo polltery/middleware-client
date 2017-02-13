@@ -58,7 +58,7 @@ app.controller('login-controller', function($scope, $location, $rootScope){
     };
 });
 
-app.controller('profile-controller', function($scope){
+app.controller('profile-controller', function($scope, $rootScope, $location){
 
     // user variables
     $scope.username = "passionateCat243";
