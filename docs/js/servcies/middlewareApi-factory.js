@@ -8,45 +8,101 @@ app.factory('MiddlewareApi', function(Database){
 
     // Gets user details
     function getUserDetails(username, token){
-        if(token === Database.getSession(username)){
-            return Database.getUser(Database.getUser(username));
+
+        var response = {
+            code : 200
+        };
+
+        if(token === Database.getToken(username)){
+             response.data = Database.getUser(Database.getUser(username));
         }else{
-            return false;
+            response.code = 400;
+            response.error = 'Invalid token';
         }
+        return response;
     }
 
     // Logs a user in and starts a session
     function login(username, password){
+
+        var response = {
+            code : 200
+        };
+
         var userDetails = Database.getUser(username);
-        if(userDetails.password === password){
-            Database.setSession(username,'online');
-            return true;
+
+        // Check if user exists
+        if(userDetails !== undefined){
+
+            // check password if user exists
+            if(userDetails.password === password){
+                Database.setToken(username,'online');
+                response.data = {
+                    token : 'online'
+                };
+
+            }else{
+                response.code = 400;
+                response.error = 'Invalid password';
+            }
+
         }else{
-            return false;
+            response.code = 400;
+            response.error = 'User not found';
         }
+        return response;
     }
 
     // Signup for user
     function signUp(username, password){
-        Database.addUser(username,password);
-        return login(username,password);
+
+        var response = {
+            code : 200
+        };
+
+        // Check if user is new
+        if(Database.getUser(username) !== undefined){
+
+            response.code = 400;
+            response.error = 'User already exists';
+
+        }else{
+
+            // Add a new user
+            Database.addUser(username,password);
+
+            // login the user
+            Database.setToken(username,'online');
+            response.data = {
+                token : 'online'
+            };
+        
+        }
+
+        return response;
     }
 
-    // Sign out
-    function signOut(username, token){
-        if(token === Database.getSession(username)){
-            Database.setSession(username, '');
-            return true;
+    // Authenticate
+    function authenticate(username, token){
+
+        var response = {
+            code : 200
+        };
+
+        if(Database.getToken(username) === token){
+            response.code = 200;
         }else{
-            return false;
+            response.code = 400;
+            response.error = 'Authentication failed';
         }
+        return response;
     }
 
     return {
         getUserDetails : getUserDetails,
         login : login,
         signUp : signUp,
-        signOut : signOut
+        authenticate : authenticate
     };
 
 });

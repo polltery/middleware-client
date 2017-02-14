@@ -4,12 +4,20 @@ Date : 14/01/2017
 */
 
 // A dummy database servcie for middleware api
-app.factory('Database', function(){
+app.factory('Database', function($log){
 
-    var users = [];
+    var users = [{
+        username: 'example',
+        password: 'example',
+        token : '',
+        details : {
+            profilePictureUrl : 'https://pixabay.com/photo-42914/',
+            description : 'example description'
+        }
+    }];
 
-    // Sets a session for a user
-    function setSession(username, token){
+    // Sets a token for a user
+    function setToken(username, token){
         angular.forEach(users, function(user,value){
             if(username === user.username){
                 user.token = token;
@@ -17,8 +25,8 @@ app.factory('Database', function(){
         });
     }
 
-    // Gets a session for a user
-    function getSession(username, token){
+    // Gets a token for a user
+    function getToken(username){
         var userToken;
         angular.forEach(users, function(user,value){
             if(username === user.username){
@@ -39,6 +47,8 @@ app.factory('Database', function(){
                 description : ''
             }
         });
+        
+        $log.debug(users);
     }
 
     // Returns userdetails of the given user
@@ -51,23 +61,12 @@ app.factory('Database', function(){
         });
         return userDetails;
     }
-
-    // Update a user given username
-    function updateUser(username, newDetails){
-        angular.forEach(users, function(user,value){
-            if(username === user.username){
-                user.username = newDetails.username;
-                user.password = newDetails.password;
-            }
-        });
-    }
     
     return {
         addUser : addUser,
         getUser : getUser,
-        updateUser : updateUser,
-        setSession : setSession,
-        getSession : getSession
+        setToken : setToken,
+        getToken : getToken
     };
 
 });

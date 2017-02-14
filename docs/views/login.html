@@ -6,73 +6,99 @@ Created on : 12/01/2017
 <!--Initialise controller-->
 <div class="container" data-ng-controller="login-controller">
 
-<!--Breadcrumbs-->
-<ol class="breadcrumb">
-  <li><a href="" data-ng-click="changeView('/')">Overview</a></li>
-  <li class="active">Login</li>
-</ol>
+    <!--Breadcrumbs-->
+    <ol class="breadcrumb">
+        <li><a href="" data-ng-click="changeView('/')">Overview</a></li>
+        <li class="active">Login</li>
+    </ol>
 
-<!-- Login form -->
-<div class="panel panel-primary">
-  <div class="panel-heading">
-    <h3 class="panel-title">Login</h3>
-  </div>
-  <div class="panel-body">
-    <form name="login-form" class="login-form">
-    <fieldset>
+    <div class="row">
 
-        <!--Username input-->
-        <div class="form-group">
-            <label for="login-username">Username</label>  
-            <input class="form-control" id="login-username" name="login-username" type="text" placeholder="username" pattern="[A-Za-z]" maxlength="25" required/> 
-        </div>
-        
-        <!-- Password input-->
-        <div class="form-group">
-            <label for="login-password">Password</label>
-            <input class="form-control" id="login-password" name="login-password" type="password" placeholder="password" maxlength="25" required/>
-        </div>
-        
-        <!-- login button -->
-        <button class="btn btn-default" type="submit" id="login-submit" name="login-submit">Login</button>
-
-    </fieldset>
-    </form>
-  </div>
-</div>
-<!--./Login form-->
-
-<!-- Signup form -->
-<div class="panel panel-success">
-    <div class="panel-heading">
-        <h3 class="panel-title">Sign-up</h3>
-    </div>
-    <div class="panel-body">
-        <form name="signup-form" class="signup-form">
-            <fieldset>
-
-                <!-- Form Name -->
-                <legend>Sign-up</legend>
-
-                <!--Username input-->
-                <div class="form-group">
-                    <label for="signup-username">Username</label>
-                    <input class="form-control" id="signup-username" name="signup-username" type="text" placeholder="username" pattern="[A-Za-z]" maxlength="25" required/>
+        <!-- Login form -->
+        <div class="col-sm-12 col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Login</h3>
                 </div>
+                <div class="panel-body">
+                    <form name="login-form" class="login-form">
+                        <fieldset>
 
-                <!-- Password input-->
-                <div class="form-group">
-                    <label for="signup-password">Password</label>
-                    <input class="form-control" id="signup-password" name="signup-password" type="password" placeholder="password" maxlength="25" required/>
+                            <!--Username input-->
+                            <div class="form-group">
+                                <label for="login-username">Username</label>
+                                <input data-ng-model='loginUsername' class="form-control" id="login-username" name="login-username" type="text" placeholder="username"
+                                    maxlength="25" required/>
+                            </div>
+
+                            <!-- Password input-->
+                            <div class="form-group">
+                                <label for="login-password">Password</label>
+                                <input data-ng-model='loginPassword' class="form-control" id="login-password" name="login-password" type="password" placeholder="password"
+                                    maxlength="25" required/>
+                            </div>
+
+                            <!-- login button -->
+                            <button data-ng-click="login()" class="btn btn-default" type="submit" id="login-submit" name="login-submit">Login</button>
+
+                            <!-- error field -->
+                            <div>
+                                <hr data-ng-if="loginError" />
+                                <div data-ng-if="loginError" class="alert alert-danger">
+                                    <button type="button" class="close" data-dismiss="alert" data-ng-click="closeLoginError()" aria-hidden="true">&times;</button>
+                                    <strong>Oops!</strong> {{loginErrorMessage}}
+                                </div>
+                            </div>
+
+                        </fieldset>
+                    </form>
                 </div>
+            </div>
+        </div>
+        <!--./Login form-->
 
-                <!-- signup button -->
-                <button class="btn btn-default" type="submit" id="signup-submit" name="signup-submit">Signup</button>
+        <!-- Signup form -->
+        <div class="col-sm-12 col-md-6">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Sign-up</h3>
+                </div>
+                <div class="panel-body">
+                    <form name="signup-form" class="signup-form">
+                        <fieldset>
 
-            </fieldset>
-        </form>
+                            <!--Sign up input-->
+                            <div class="form-group">
+                                <label for="signup-username">Username</label>
+                                <input data-ng-model="signupUsername" class="form-control" id="signup-username" name="signup-username" type="text" placeholder="username"
+                                    maxlength="25" required/>
+                            </div>
+
+                            <!-- Password input-->
+                            <div class="form-group">
+                                <label for="signup-password">Password</label>
+                                <input data-ng-model="signupPassword" class="form-control" id="signup-password" name="signup-password" type="password" placeholder="password"
+                                    maxlength="25" required/>
+                            </div>
+
+                            <!-- signup button -->
+                            <button data-ng-click="signUp()" class="btn btn-default" type="submit" id="signup-submit" name="signup-submit">Signup</button>
+
+                            <!-- error field -->
+                            <div>
+                                <hr data-ng-if="signupError" />
+                                <div data-ng-if="signupError" class="alert alert-danger">
+                                    <button type="button" class="close" data-dismiss="alert" data-ng-click="closeSignupError()" aria-hidden="true">&times;</button>
+                                    <strong>Oops!</strong> {{signupErrorMessage}}.
+                                </div>
+                            </div>
+
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!--./signup form-->
     </div>
-</div>
-<!--./Login form-->
 
 </div>

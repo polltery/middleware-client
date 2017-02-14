@@ -10,6 +10,7 @@ app.controller('overview-controller', function($scope, $location, $rootScope){
         }else{
             $rootScope.isOverview = false;
         }
+        $rootScope.token = '';
         $location.path(view);
     };
 });
