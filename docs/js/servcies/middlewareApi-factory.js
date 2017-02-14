@@ -3,21 +3,50 @@ Author(s) : Balraj Singh Bains
 Date : 14/01/2017
 */
 
-// Angular Service for communicating with the middleware
-app.factory('MiddlewareApi', function(){
+// Angular Service acting as a middleware
+app.factory('MiddlewareApi', function(Database){
 
-    function getUser(){
-        var user = {
-            username : 'passionateCat243',
-            description : 'I am a very passionate cat. When I am not passionate I meow.',
-            profilePictureURL : 'http://d39kbiy71leyho.cloudfront.net/wp-content/uploads/2016/05/09170020/cats-politics-TN.jpg'
-        };
+    // Gets user details
+    function getUserDetails(username, token){
+        if(token === Database.getSession(username)){
+            return Database.getUser(Database.getUser(username));
+        }else{
+            return false;
+        }
+    }
 
-        return user;
+    // Logs a user in and starts a session
+    function login(username, password){
+        var userDetails = Database.getUser(username);
+        if(userDetails.password === password){
+            Database.setSession(username,'online');
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    // Signup for user
+    function signUp(username, password){
+        Database.addUser(username,password);
+        return login(username,password);
+    }
+
+    // Sign out
+    function signOut(username, token){
+        if(token === Database.getSession(username)){
+            Database.setSession(username, '');
+            return true;
+        }else{
+            return false;
+        }
     }
 
     return {
-        getUser : getUser
+        getUserDetails : getUserDetails,
+        login : login,
+        signUp : signUp,
+        signOut : signOut
     };
 
 });
