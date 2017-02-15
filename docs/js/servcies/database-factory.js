@@ -11,7 +11,7 @@ app.factory('Database', function($log){
         password: 'example',
         token : '',
         details : {
-            profilePictureUrl : 'https://pixabay.com/photo-42914/',
+            profilePictureUrl : 'https://d30y9cdsu7xlg0.cloudfront.net/png/138926-200.png',
             description : 'example description'
         }
     }];
@@ -43,8 +43,8 @@ app.factory('Database', function($log){
             password : password,
             token : '',
             details : {
-                profilePictureUrl : 'https://pixabay.com/photo-42914/',
-                description : ''
+                profilePictureUrl : 'https://d30y9cdsu7xlg0.cloudfront.net/png/138926-200.png',
+                description : 'No description available'
             }
         });
         

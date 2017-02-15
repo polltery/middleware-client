@@ -13,13 +13,26 @@ app.factory('MiddlewareApi', function(Database){
             code : 200
         };
 
-        if(token === Database.getToken(username)){
-             response.data = Database.getUser(Database.getUser(username));
+        var auth = authenticate(username, token);
+
+        if(auth.code === 200){
+            var userDetails = Database.getUser(username);
+
+            if(userDetails !== undefined){
+                response.data = {
+                    userDetails : userDetails
+                };
+            }else{
+                response.code = 400;
+                response.error = 'user was not found';
+            }
+
         }else{
-            response.code = 400;
-            response.error = 'Invalid token';
+            return auth;
         }
+
         return response;
+
     }
 
     // Logs a user in and starts a session

@@ -3,17 +3,22 @@ Author(s) : Balraj Singh Bains
 Created on : 13/01/2017
 -->
 
-<!--Initialise controller-->
-<div>
+
+<!-- Profile errors go here -->
+<div data-ng-if="profileError" class="jumbotron bg-danger">
+      <div class="container text-center">
+            <h3>{{profileErrorMessage}}</h3>
+      </div>
+</div>
 
 <!--Profile info-->
-<div class="jumbotron">
+<div data-ng-if="!profileError" class="jumbotron">
     <div class="container text-center">
         <div class="row">
             <div class="col-xs-4 col-md-4"></div>
             <div class="col-xs-4 col-md-4">
-                <a href="#" class="thumbnail">
-                <img src="http://d39kbiy71leyho.cloudfront.net/wp-content/uploads/2016/05/09170020/cats-politics-TN.jpg" alt="Cat picture">
+                <a href="" class="thumbnail">
+                  <img data-ng-src="{{profilePictureUrl}}" alt="profile picture">
                 </a>
             </div>
         </div>
@@ -94,5 +99,3 @@ Created on : 13/01/2017
 
 </div>
 <!--./main container-->
-
-</div>
