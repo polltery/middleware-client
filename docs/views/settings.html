@@ -6,70 +6,124 @@ Created on : 13/01/2017
 <!--Initialise controller-->
 <div class="container">
 
-<!--Breadcrumbs-->
-<ol class="breadcrumb">
-  <li><a href="" data-ng-click="changeView('/profile')">Profile</a></li>
-  <li class="active">Settings</li>
-</ol>
+  <!--Breadcrumbs-->
+  <ol class="breadcrumb">
+    <li><a href="" data-ng-click="changeView('/profile')">Profile</a></li>
+    <li class="active">Settings</li>
+  </ol>
 
-<form class="form-horizontal">
-<fieldset>
+  <form class="form-horizontal">
+    <fieldset>
 
-<!-- Form Name -->
-<legend>Settings</legend>
+      <!-- Form Name -->
+      <legend>Settings</legend>
 
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-sm-4 control-label" for="profile-username">Username</label>  
-  <div class="col-sm-8">
-  <input data-ng-model="username" id="profile-username" name="profile-username" type="text" class="form-control input-md" disabled>
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-sm-4 control-label" for="profile-username">Username</label>
+        <div class="col-sm-8">
+          <input data-ng-model="username" id="profile-username" name="profile-username" type="text" class="form-control input-md" disabled>
+        </div>
+      </div>
+
+      <!-- Textarea -->
+      <div class="form-group">
+        <label class="col-sm-4 control-label" for="profile-description">Description</label>
+        <div class="col-sm-8">
+          <textarea data-ng-model="description" data-ng-change="enableSaveButton()" class="form-control" id="profile-description" name="profile-description">{{description}}</textarea>
+        </div>
+      </div>
+
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-sm-4 control-label" for="profile-picture">Profile Picture Link</label>
+        <div class="col-sm-8">
+          <input data-ng-model="profilePictureUrl" data-ng-change="enableSaveButton()" id="profile-picture" name="profile-picture"
+            type="text" placeholder="{{profilePictureUrl}}" class="form-control input-md">
+            <span class="help-block">Link for your profile picture</span>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <button type="button" class="btn btn-primary" data-ng-class="saveButton" data-ng-click="saveSettings()"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>Save</button>
+        <hr/>
+      </div>
+
+      <!-- error field -->
+      <div>
+        <hr data-ng-if="settingsError" />
+        <div data-ng-if="settingsError" class="alert alert-danger">
+          <button type="button" class="close" data-dismiss="alert" data-ng-click="closeSettingsError()" aria-hidden="true">&times;</button>
+          <strong>Oops!</strong> {{settingsErrorMessage}}.
+        </div>
+      </div>
+
+      <!-- success field -->
+      <div>
+        <hr data-ng-if="settingsSuccess" />
+        <div data-ng-if="settingsSuccess" class="alert alert-success">
+          <button type="button" class="close" data-dismiss="alert" data-ng-click="closeSettingsSuccess()" aria-hidden="true">&times;</button>
+          <strong>Yay!</strong> {{settingsSuccessMessage}}.
+        </div>
+      </div>
+
+
+    </fieldset>
+  </form>
+
+  <legend>Linked Accounts</legend>
+
+  <!-- Linked accounts list -->
+  <ul class="list-group">
+    <li class="list-group-item">
+      <b>Twitter:</b> exampleTwitter
+      <button type="button" class="btn btn-danger btn-xs pull-right">
+      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>Remove
+    </button>
+    </li>
+  </ul>
+
+  <!-- Add new account form-->
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">Add Account</h3>
+    </div>
+    <div class="panel-body">
+      <form class="form-horizontal">
+        <fieldset>
+
+          <div class="form-group">
+
+            <!-- account type-->
+            <div class="col-xs-6 col-sm-6">
+              <select name="account-type" id="account-type" class="form-control">
+              <option value="account-type-twitter">Twitter</option>
+              <option value="account-type-instagram">Instagram</option>
+              </select>
+            </div>
+
+            <!-- account username-->
+            <div class="col-xs-6 col-sm-6">
+              <input type="text" name="account-username" id="account-username" class="form-control" value="" required="required" pattern=""
+                placeholder="username">
+            </div>
+
+          </div>
+
+          <div class="text-center">
+            <button type="button" class="btn btn-sm btn-success"> 
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Add
+      </button>
+          </div>
+
+        </fieldset>
+      </form>
+    </div>
   </div>
-</div>
 
-<!-- Textarea -->
-<div class="form-group">
-  <label class="col-sm-4 control-label" for="profile-description">Description</label>
-  <div class="col-sm-8">                     
-    <textarea data-ng-model="description" data-ng-change="enableSaveButton()" class="form-control" id="profile-description" name="profile-description">{{description}}</textarea>
-  </div>
-</div>
-
-<!-- Text input-->
-<div class="form-group">
-  <label class="col-sm-4 control-label" for="profile-picture">Profile Picture Link</label>  
-  <div class="col-sm-8">
-  <input data-ng-model="profilePictureUrl" data-ng-change="enableSaveButton()" id="profile-picture" name="profile-picture" type="text" placeholder="{{profilePictureUrl}}" class="form-control input-md">
-  <span class="help-block">Link for your profile picture</span>  
-  </div>
-</div>
-
-<div class="text-center">
-    <button type="button" class="btn btn-primary" data-ng-class="saveButton" data-ng-click="saveSettings()"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>Save</button>
-    <hr/>
+  <div class="text-center">
     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span><a href="" data-ng-click="changeView('/profile')">Return to profile</a>
-</div>
-
-<!-- error field -->
-<div>
-    <hr data-ng-if="settingsError" />
-    <div data-ng-if="settingsError" class="alert alert-danger">
-        <button type="button" class="close" data-dismiss="alert" data-ng-click="closeSettingsError()" aria-hidden="true">&times;</button>
-        <strong>Oops!</strong> {{settingsErrorMessage}}.
-    </div>
-</div>
-
-<!-- success field -->
-<div>
-    <hr data-ng-if="settingsSuccess" />
-    <div data-ng-if="settingsSuccess" class="alert alert-success">
-        <button type="button" class="close" data-dismiss="alert" data-ng-click="closeSettingsSuccess()" aria-hidden="true">&times;</button>
-        <strong>Yay!</strong> {{settingsSuccessMessage}}.
-    </div>
-</div>
-
-
-</fieldset>
-</form>
-
+    <br><br>
+  </div>
 
 </div>
