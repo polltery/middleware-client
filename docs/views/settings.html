@@ -50,23 +50,16 @@ Created on : 13/01/2017
       </div>
 
       <!-- error field -->
-      <div>
-        <hr data-ng-if="settingsError" />
-        <div data-ng-if="settingsError" class="alert alert-danger">
-          <button type="button" class="close" data-dismiss="alert" data-ng-click="closeSettingsError()" aria-hidden="true">&times;</button>
-          <strong>Oops!</strong> {{settingsErrorMessage}}.
-        </div>
+      <div data-ng-if="settingsError" class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert" data-ng-click="closeSettingsError()" aria-hidden="true">&times;</button>
+        <strong>Oops!</strong> {{settingsErrorMessage}}.
       </div>
 
       <!-- success field -->
-      <div>
-        <hr data-ng-if="settingsSuccess" />
-        <div data-ng-if="settingsSuccess" class="alert alert-success">
-          <button type="button" class="close" data-dismiss="alert" data-ng-click="closeSettingsSuccess()" aria-hidden="true">&times;</button>
-          <strong>Yay!</strong> {{settingsSuccessMessage}}.
-        </div>
+      <div data-ng-if="settingsSuccess" class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert" data-ng-click="closeSettingsSuccess()" aria-hidden="true">&times;</button>
+        <strong>Yay!</strong> {{settingsSuccessMessage}}.
       </div>
-
 
     </fieldset>
   </form>
@@ -75,9 +68,9 @@ Created on : 13/01/2017
 
   <!-- Linked accounts list -->
   <ul class="list-group">
-    <li class="list-group-item">
-      <b>Twitter:</b> exampleTwitter
-      <button type="button" class="btn btn-danger btn-xs pull-right">
+    <li class="list-group-item" data-ng-repeat="account in accounts">
+      <b>{{account.type}}:</b> {{account.username}}
+      <button type="button" class="btn btn-danger btn-xs pull-right" data-ng-click="removeAccount(account.type,account.username)">
       <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>Remove
     </button>
     </li>
@@ -96,29 +89,48 @@ Created on : 13/01/2017
 
             <!-- account type-->
             <div class="col-xs-6 col-sm-6">
-              <select name="account-type" id="account-type" class="form-control">
-              <option value="account-type-twitter">Twitter</option>
-              <option value="account-type-instagram">Instagram</option>
+              <select data-ng-model="addAccountType" name="account-type" id="account-type" class="form-control">
+              <option value="twitter">Twitter</option>
+              <option value="instagram">Instagram</option>
               </select>
             </div>
 
             <!-- account username-->
             <div class="col-xs-6 col-sm-6">
-              <input type="text" name="account-username" id="account-username" class="form-control" value="" required="required" pattern=""
-                placeholder="username">
+              <input type="text" data-ng-model="addAccountUsername" name="account-username" id="account-username" class="form-control" value="" required="required" pattern=""
+                placeholder="username" required>
             </div>
 
           </div>
 
           <div class="text-center">
-            <button type="button" class="btn btn-sm btn-success"> 
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Add
-      </button>
+            <button data-ng-click="addAccount()" type="button" class="btn btn-sm btn-success"> 
+              <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Add
+            </button>
           </div>
 
         </fieldset>
       </form>
-    </div>
+
+      <!-- error field -->
+      <div>
+        <hr data-ng-if="addAccountError">
+        <div data-ng-if="addAccountError" class="alert alert-danger">
+          <button type="button" class="close" data-dismiss="alert" data-ng-click="closeAddAccountError()" aria-hidden="true">&times;</button>
+          <strong>Oops!</strong> {{addAccountErrorMessage}}.
+        </div>
+      </div>
+
+      <!-- success field -->
+      <div>
+        <hr data-ng-if="addAccountSuccess">
+        <div data-ng-if="addAccountSuccess" class="alert alert-success">
+          <button type="button" class="close" data-dismiss="alert" data-ng-click="closeAddAccountSuccess()" aria-hidden="true">&times;</button>
+          <strong>Yay!</strong> {{addAccountSuccessMessage}}.
+        </div>
+      </div>
+
+    </div><!--./panel body-->
   </div>
 
   <div class="text-center">

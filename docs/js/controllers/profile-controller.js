@@ -27,11 +27,20 @@ app.controller('profile-controller', function($scope, $rootScope, $location, Mid
     $scope.profileError = false;
     $scope.profileErrorMessage  = '';
 
+    // Settings page variables
     $scope.saveButton = 'disabled';
     $scope.settingsError = false;
     $scope.settingsErrorMessage = '';
     $scope.settingsSuccess = false;
     $scope.settingsSuccessMessage = '';
+
+    $scope.addAccountError = false;
+    $scope.addAccountErrorMessage = '';
+    $scope.addAccountType = 'twitter';
+    $scope.addAccountSuccess = false;
+    $scope.addAccountSuccessMessage = '';
+    $scope.accounts = [];
+    $scope.addAccountUsername = '';
 
     if(!auth){
         $scope.changeView('/login');
@@ -47,6 +56,7 @@ app.controller('profile-controller', function($scope, $rootScope, $location, Mid
             // load user variables
             $scope.description = response.data.userDetails.details.description;
             $scope.profilePictureUrl = response.data.userDetails.details.profilePictureUrl;
+            $scope.accounts = response.data.userDetails.accounts;
 
         }else{
 
@@ -62,21 +72,23 @@ app.controller('profile-controller', function($scope, $rootScope, $location, Mid
 
     $scope.saveSettings = function(){
 
-        settings = {
-            description : $scope.description,
-            profilePictureUrl : $scope.profilePictureUrl
-        };
+        if($scope.saveButton !== 'disabled'){
+            settings = {
+                description : $scope.description,
+                profilePictureUrl : $scope.profilePictureUrl
+            };
 
-        response = MiddlewareApi.updateSettings($scope.username, settings, $rootScope.token);
+            response = MiddlewareApi.updateSettings($scope.username, settings, $rootScope.token);
 
-        $log.debug(response);
+            $log.debug(response);
 
-        if(response.code === 200){
-            $scope.settingsSuccess = true;
-            $scope.settingsSuccessMessage = 'Settings updated successfully';
-        }else{
-            $scope.settingsError = true;
-            $scope.settingsErrorMessage = response.error;
+            if(response.code === 200){
+                $scope.settingsSuccess = true;
+                $scope.settingsSuccessMessage = 'Settings updated successfully';
+            }else{
+                $scope.settingsError = true;
+                $scope.settingsErrorMessage = response.error;
+            }
         }
 
     };
@@ -87,6 +99,59 @@ app.controller('profile-controller', function($scope, $rootScope, $location, Mid
 
     $scope.closeSettingsSuccess = function(){
         $scope.settingsSuccess = false;
+    };
+
+    $scope.addAccount = function(){
+
+        if($scope.addAccountUsername === ''){
+            $scope.addAccountError = true;
+            $scope.addAccountErrorMessage = 'Please add a username';
+        }else{
+            accountDetails = {
+                type : $scope.addAccountType,
+                username : $scope.addAccountUsername
+            };
+            
+            console.log(accountDetails);
+
+            var response = MiddlewareApi.addAccount($scope.username, accountDetails, $rootScope.token);
+
+            $log.debug(response);
+
+            if(response.code === 200){
+                $scope.addAccountSuccess = true;
+                $scope.addAccountSuccessMessage = 'Account added successfully';
+            
+            }else{
+                $scope.addAccountError = true;
+                $scope.addAccountErrorMessage = response.error;
+            }
+        }
+    };
+
+    $scope.closeAddAccountError = function(){
+        $scope.addAccountError = false;
+    };
+
+    $scope.closeAddAccountSuccess = function(){
+        $scope.addAccountSuccess = false;
+    };
+
+    $scope.removeAccount = function(type,username){
+        accountDetails = {
+            type : type,
+            username : username
+        };
+
+        var response = MiddlewareApi.removeAccount($scope.username, accountDetails, $rootScope.token);
+
+        $log.debug(response);
+
+        if(response.code === 200){
+
+        }else{
+
+        }
     };
 
 });

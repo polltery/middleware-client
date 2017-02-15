@@ -13,7 +13,17 @@ app.factory('Database', function($log){
         details : {
             profilePictureUrl : 'https://d30y9cdsu7xlg0.cloudfront.net/png/138926-200.png',
             description : 'example description'
-        }
+        },
+        accounts : [
+            {
+                type : 'twitter',
+                username : 'exampleTwitter'
+            },
+            {
+                type : 'instagram',
+                username : 'exampleInstagram'
+            }
+        ]
     }];
 
     // Sets a token for a user
@@ -45,7 +55,8 @@ app.factory('Database', function($log){
             details : {
                 profilePictureUrl : 'https://d30y9cdsu7xlg0.cloudfront.net/png/138926-200.png',
                 description : 'No description available'
-            }
+            },
+            accounts : []
         });
         
         $log.debug(users);
@@ -72,6 +83,36 @@ app.factory('Database', function($log){
                 };
             }
         });
+        $log.debug(users);
+    }
+
+    function addAccount(username, accountsDetails){
+        angular.forEach(users, function(user,value){
+            if(username === user.username){
+                user.accounts.push({
+                    type : accountsDetails.type,
+                    username : accountsDetails.username
+                });
+            }
+        });
+        $log.debug(users);
+    }
+
+    function removeAccount(username, accountsDetails){
+        angular.forEach(users, function(user,value){
+            if(username === user.username){
+                i = 0;
+                var delete_id;
+                angular.forEach(user.accounts, function(account, value){
+                    if(account.username == accountsDetails.username && account.type == accountsDetails.type){
+                        delete_id = i;
+                    }
+                    i++;
+                });
+                delete user.accounts[delete_id];
+            }
+        });
+        $log.debug(users);
     }
     
     return {
@@ -79,7 +120,9 @@ app.factory('Database', function($log){
         getUser : getUser,
         setToken : setToken,
         getToken : getToken,
-        setDetails : setDetails
+        setDetails : setDetails,
+        addAccount : addAccount,
+        removeAccount : removeAccount
     };
 
 });

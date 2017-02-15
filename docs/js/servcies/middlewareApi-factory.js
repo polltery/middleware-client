@@ -140,12 +140,90 @@ app.factory('MiddlewareApi', function(Database){
 
     }
 
+    function addAccount(username, accountDetails, token){
+        var response = {
+            code : 200
+        };
+
+        var auth = authenticate(username, token);
+
+        if(auth.code === 200){
+            var userDetails = Database.getUser(username);
+
+            if(userDetails !== undefined){
+
+                var accountExsits = false;
+                angular.forEach(userDetails.accounts, function(account, value){
+                    if(accountDetails.type === account.type && accountDetails.username === account.username){
+                        accountExsits = true;
+                    }
+                });
+
+                if(accountExsits){
+                    response.code = 400;
+                    response.error = 'The account you are trying to add already exists';
+                }else{
+                    Database.addAccount(username, accountDetails);
+                }
+            }else{
+                response.code = 400;
+                response.error = 'user was not found';
+            }
+
+        }else{
+            return auth;
+        }
+
+        return response;
+    }
+
+    function removeAccount(username, accountDetails, token){
+        var response = {
+            code : 200
+        };
+
+        var auth = authenticate(username, token);
+
+        if(auth.code === 200){
+
+            var userDetails = Database.getUser(username);
+
+            if(userDetails !== undefined){
+
+                var accountExsits = false;
+                angular.forEach(userDetails.accounts, function(account, value){
+                    if(accountDetails.type === account.type && accountDetails.username === account.username){
+                        accountExsits = true;
+                    }
+                });
+                
+                if(!accountExsits){
+                    response.code = 400;
+                    response.error = 'Nothing to delete, Account does not exists';
+                }else{
+                    // Account details must contain a type and username
+                    Database.removeAccount(username, accountDetails);
+                }
+            }else{
+                response.code = 400;
+                response.error = 'user was not found';
+            }
+
+        }else{
+            return auth;
+        }
+
+        return response;
+    }
+
     return {
         getUserDetails : getUserDetails,
         login : login,
         signUp : signUp,
         authenticate : authenticate,
-        updateSettings : updateSettings
+        updateSettings : updateSettings,
+        addAccount : addAccount,
+        removeAccount : removeAccount
     };
 
 });
