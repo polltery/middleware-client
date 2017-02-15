@@ -27,6 +27,12 @@ app.controller('profile-controller', function($scope, $rootScope, $location, Mid
     $scope.profileError = false;
     $scope.profileErrorMessage  = '';
 
+    $scope.saveButton = 'disabled';
+    $scope.settingsError = false;
+    $scope.settingsErrorMessage = '';
+    $scope.settingsSuccess = false;
+    $scope.settingsSuccessMessage = '';
+
     if(!auth){
         $scope.changeView('/login');
     }else{
@@ -49,5 +55,38 @@ app.controller('profile-controller', function($scope, $rootScope, $location, Mid
         }
 
     }
+
+    $scope.enableSaveButton = function(){
+        $scope.saveButton = '';
+    };
+
+    $scope.saveSettings = function(){
+
+        settings = {
+            description : $scope.description,
+            profilePictureUrl : $scope.profilePictureUrl
+        };
+
+        response = MiddlewareApi.updateSettings($scope.username, settings, $rootScope.token);
+
+        $log.debug(response);
+
+        if(response.code === 200){
+            $scope.settingsSuccess = true;
+            $scope.settingsSuccessMessage = 'Settings updated successfully';
+        }else{
+            $scope.settingsError = true;
+            $scope.settingsErrorMessage = response.error;
+        }
+
+    };
+
+    $scope.closeSettingsError = function(){
+        $scope.settingsError = false;
+    };
+
+    $scope.closeSettingsSuccess = function(){
+        $scope.settingsSuccess = false;
+    };
 
 });

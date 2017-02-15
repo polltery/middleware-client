@@ -61,12 +61,25 @@ app.factory('Database', function($log){
         });
         return userDetails;
     }
+
+    // Set details of a user
+    function setDetails(username, details){
+        angular.forEach(users, function(user,value){
+            if(username === user.username){
+                user.details = {
+                    description : details.description,
+                    profilePictureUrl : details.profilePictureUrl
+                };
+            }
+        });
+    }
     
     return {
         addUser : addUser,
         getUser : getUser,
         setToken : setToken,
-        getToken : getToken
+        getToken : getToken,
+        setDetails : setDetails
     };
 
 });

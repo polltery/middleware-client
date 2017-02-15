@@ -111,11 +111,41 @@ app.factory('MiddlewareApi', function(Database){
         return response;
     }
 
+    function updateSettings(username, settings, token){
+
+        var response = {
+            code : 200
+        };
+
+        var auth = authenticate(username, token);
+
+        if(auth.code === 200){
+
+            var userDetails = Database.getUser(username);
+
+            if(userDetails !== undefined){
+                console.log(settings);
+                Database.setDetails(username, settings);
+                response.code = 200;
+            }else{
+                response.code = 400;
+                response.error = 'user was not found';
+            }
+
+        }else{
+            return auth;
+        }
+
+        return response;
+
+    }
+
     return {
         getUserDetails : getUserDetails,
         login : login,
         signUp : signUp,
-        authenticate : authenticate
+        authenticate : authenticate,
+        updateSettings : updateSettings
     };
 
 });
