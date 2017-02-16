@@ -21,21 +21,21 @@ Created on : 12/01/2017
                     <h3 class="panel-title">Login</h3>
                 </div>
                 <div class="panel-body">
-                    <form name="login-form" class="login-form">
+                    <form name="loginForm" class="login-form">
                         <fieldset>
 
                             <!--Username input-->
                             <div class="form-group">
                                 <label for="login-username">Username</label>
                                 <input data-ng-model='loginUsername' class="form-control" id="login-username" name="login-username" type="text" placeholder="username"
-                                    maxlength="25" required/>
+                                    maxlength="25" pattern="[A-Za-z0-9]" title="Username with letters and/or numbers only" required/>
                             </div>
 
                             <!-- Password input-->
                             <div class="form-group">
                                 <label for="login-password">Password</label>
                                 <input data-ng-model='loginPassword' class="form-control" id="login-password" name="login-password" type="password" placeholder="password"
-                                    maxlength="25" required/>
+                                    maxlength="25" minlength="1" required/>
                             </div>
 
                             <!-- login button -->
@@ -64,14 +64,14 @@ Created on : 12/01/2017
                     <h3 class="panel-title">Sign-up</h3>
                 </div>
                 <div class="panel-body">
-                    <form name="signup-form" class="signup-form">
+                    <form name="signupForm" class="signup-form">
                         <fieldset>
 
                             <!--Sign up input-->
                             <div class="form-group">
                                 <label for="signup-username">Username</label>
-                                <input data-ng-model="signupUsername" class="form-control" id="signup-username" name="signup-username" type="text" placeholder="username"
-                                    maxlength="25" required/>
+                                <input data-ng-model="signupUsername" class="form-control" id="signup-username" name="signup-username" type="text" placeholder="username" minlength="1"
+                                    maxlength="25" pattern="[A-Za-z0-9]" title="Username with letters and/or numbers only" required/>
                             </div>
 
                             <!-- Password input-->

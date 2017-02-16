@@ -14,10 +14,10 @@ app.controller('login-controller', function($scope, $location, $rootScope, Middl
     };
 
     // Form variables
-    $scope.loginUsername = '';
-    $scope.loginPassword = '';
-    $scope.signupUsername = '';
-    $scope.signupPassword = '';
+    $scope.loginUsername;
+    $scope.loginPassword;
+    $scope.signupUsernam;
+    $scope.signupPassword;
 
     // Error variables
     $scope.loginError = false;
@@ -34,7 +34,7 @@ app.controller('login-controller', function($scope, $location, $rootScope, Middl
     // Login
     $scope.login = function(){
 
-        if($scope.loginUsername !== '' && $scope.loginPassword !== ''){
+        if($scope.loginForm.$valid){
 
             // Get a login response
             response = MiddlewareApi.login($scope.loginUsername, $scope.loginPassword);
@@ -55,7 +55,7 @@ app.controller('login-controller', function($scope, $location, $rootScope, Middl
     // Sign up
     $scope.signUp = function(){
 
-        if($scope.signupUsername !== '' && $scope.signupPassword !== ''){
+        if($scope.signupForm.$valid){
 
             // Get a response
             response = MiddlewareApi.signUp($scope.signupUsername, $scope.signupPassword);
