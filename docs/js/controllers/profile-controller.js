@@ -30,6 +30,8 @@ app.controller('profile-controller', function($scope, $rootScope, $location, Mid
     $scope.twitterAccounts = [];
     $scope.instagramAccounts = [];
 
+    $scope.searchInput;
+
     // Settings page variables
     $scope.saveButton = 'disabled';
     $scope.settingsError = false;
