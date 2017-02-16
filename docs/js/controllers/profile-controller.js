@@ -42,6 +42,7 @@ app.controller('profile-controller', function($scope, $rootScope, $location, Mid
     $scope.accounts = [];
     $scope.addAccountUsername = '';
 
+    // Check if user has token
     if(!auth){
         $scope.changeView('/login');
     }else{
@@ -66,10 +67,12 @@ app.controller('profile-controller', function($scope, $rootScope, $location, Mid
 
     }
 
+    // Enables the save button
     $scope.enableSaveButton = function(){
         $scope.saveButton = '';
     };
 
+    // On click of save button do this..
     $scope.saveSettings = function(){
 
         if($scope.saveButton !== 'disabled'){
@@ -93,6 +96,7 @@ app.controller('profile-controller', function($scope, $rootScope, $location, Mid
 
     };
 
+    // On close of error and success section
     $scope.closeSettingsError = function(){
         $scope.settingsError = false;
     };
@@ -101,6 +105,7 @@ app.controller('profile-controller', function($scope, $rootScope, $location, Mid
         $scope.settingsSuccess = false;
     };
 
+    // On click of add account button
     $scope.addAccount = function(){
 
         if($scope.addAccountUsername === ''){
@@ -129,6 +134,7 @@ app.controller('profile-controller', function($scope, $rootScope, $location, Mid
         }
     };
 
+    // On close of error and success section
     $scope.closeAddAccountError = function(){
         $scope.addAccountError = false;
     };
@@ -137,6 +143,7 @@ app.controller('profile-controller', function($scope, $rootScope, $location, Mid
         $scope.addAccountSuccess = false;
     };
 
+    // On remove account 
     $scope.removeAccount = function(type,username){
         accountDetails = {
             type : type,

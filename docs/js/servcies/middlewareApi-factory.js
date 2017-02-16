@@ -3,6 +3,25 @@ Author(s) : Balraj Singh Bains
 Date : 14/01/2017
 */
 
+/*
+
+
+Each function takes in parameters and gives a response.
+
+Check on the controller if the response is 200 or 400.
+
+200 is for sucess and 400 is for error
+
+the structure is
+
+response = {
+    code : 200 or 400
+    error (if 400) : 'error message'
+    data (if 200) : JSON containing the data
+}
+
+*/
+
 // Angular Service acting as a middleware
 app.factory('MiddlewareApi', function(Database){
 
