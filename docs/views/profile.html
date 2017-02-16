@@ -13,89 +13,125 @@ Created on : 13/01/2017
 
 <!--Profile info-->
 <div data-ng-if="!profileError" class="jumbotron">
-    <div class="container text-center">
-        <div class="row">
-            <div class="col-xs-4 col-md-4"></div>
-            <div class="col-xs-4 col-md-4">
-                <a href="" class="thumbnail">
-                  <img data-ng-src="{{profilePictureUrl}}" alt="profile picture">
-                </a>
+      <div class="container text-center">
+            <div class="row">
+                  <div class="col-xs-4 col-md-4"></div>
+                  <div class="col-xs-4 col-md-4">
+                        <a href="" class="thumbnail">
+                              <img data-ng-src="{{profilePictureUrl}}" alt="profile picture">
+                        </a>
+                  </div>
             </div>
-        </div>
-        <h3>Hello, {{username}}</h3>
-        <p>{{description}}</p>
-        <hr/>
-        <button type="button" class="btn btn-info" data-ng-click="changeView('/settings')">
+            <h3>Hello, {{username}}</h3>
+            <p>{{description}}</p>
+            <hr/>
+            <button type="button" class="btn btn-info" data-ng-click="changeView('/settings')">
         <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>Settings</button>
-    </div>
+      </div>
 </div>
 
 <!--main container-->
 <div class="container">
 
-<div class="row">
 
-      <div class="col-sm-12 col-md-6">
-      <h3 class="page-header">Twitter</h3>
-      <!--Feed example-->
-      <div class="panel panel-primary">
-            <div class="panel-heading">
-                  <h3 class="panel-title">{{username}}</h3>
+      <div class="input-group">
+            <div class="input-group-addon">
+                  <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
             </div>
-            <div class="panel-body">
-                  Content
-            </div>
+            <input type="text" class="form-control" id="feed-filter" placeholder="Type to filter content..">
       </div>
-      <div class="panel panel-primary">
-            <div class="panel-heading">
-                  <h3 class="panel-title">{{username}}</h3>
-            </div>
-            <div class="panel-body">
-                  Content
-            </div>
-      </div>
-      <div class="panel panel-primary">
-            <div class="panel-heading">
-                  <h3 class="panel-title">{{username}}</h3>
-            </div>
-            <div class="panel-body">
-                  Content
-            </div>
-      </div>
-      </div>
-      <div class="col-sm-12 col-md-6">
-      <!--Feed example-->
-      <h3 class="page-header">Instagram</h3>
-      <div class="panel panel-success">
-            <div class="panel-heading">
-                  <h3 class="panel-title">{{username}}</h3>
-            </div>
-            <div class="panel-body">
-                  Content
-            </div>
-      </div>
-      <div class="panel panel-success">
-            <div class="panel-heading">
-                  <h3 class="panel-title">{{username}}</h3>
-            </div>
-            <div class="panel-body">
-                  Content
-            </div>
-      </div>
-      <div class="panel panel-success">
-            <div class="panel-heading">
-                  <h3 class="panel-title">{{username}}</h3>
-            </div>
-            <div class="panel-body">
-                  Content
-            </div>
-      </div>
-      </div>
-</div>
 
-<div class="text-center">
-    <a href=""><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>&nbsp;Show more</a>
-</div>
+
+      <div class="row">
+
+            <div class="col-sm-12 col-md-6">
+                  <h3 class="page-header">Twitter</h3>
+
+                  <!-- error for twitter accounts-->
+                  <div class="well well-lg well-danger" data-ng-if="twitterAccounts.length === 0">
+                        <h3 class="text-center">
+                              Oops! no linked accout :(
+                        </h3>
+                        <p class="text-center">Visit <a href="" data-ng-click="changeView('/settings')">settings</a> to link account<p>
+                  </div>
+
+                  <!--feeds-->
+                  <div data-ng-if="twitterAccounts.length > 0">
+                        <div class="panel panel-primary">
+                              <div class="panel-heading">
+                                    <h3 class="panel-title">{{username}}</h3>
+                              </div>
+                              <div class="panel-body">
+                                    Content
+                              </div>
+                        </div>
+                        <div class="panel panel-primary">
+                              <div class="panel-heading">
+                                    <h3 class="panel-title">{{username}}</h3>
+                              </div>
+                              <div class="panel-body">
+                                    Content
+                              </div>
+                        </div>
+                        <div class="panel panel-primary">
+                              <div class="panel-heading">
+                                    <h3 class="panel-title">{{username}}</h3>
+                              </div>
+                              <div class="panel-body">
+                                    Content
+                              </div>
+                        </div>
+                  </div>
+            </div>
+
+            <!-- instagram feed-->
+            <div class="col-sm-12 col-md-6">
+
+                  <!--Feed example-->
+                  <h3 class="page-header">Instagram</h3>
+
+                  <!-- error for instagram accounts-->
+                  <div class="well well-lg well-danger" data-ng-if="instagramAccounts.length === 0">
+                        <h3 class="text-center">
+                              Oops! no linked accout :(
+                        </h3>
+                        <p class="text-center">Visit <a href="" data-ng-click="changeView('/settings')">settings</a> to link account<p>
+                  </div>
+
+                  <!--feeds-->
+                  <div data-ng-if="instagramAccounts.length > 0">
+                        <div class="panel panel-success">
+                              <div class="panel-heading">
+                                    <h3 class="panel-title">{{username}}</h3>
+                              </div>
+                              <div class="panel-body">
+                                    Content
+                              </div>
+                        </div>
+                        <div class="panel panel-success">
+                              <div class="panel-heading">
+                                    <h3 class="panel-title">{{username}}</h3>
+                              </div>
+                              <div class="panel-body">
+                                    Content
+                              </div>
+                        </div>
+                        <div class="panel panel-success">
+                              <div class="panel-heading">
+                                    <h3 class="panel-title">{{username}}</h3>
+                              </div>
+                              <div class="panel-body">
+                                    Content
+                              </div>
+                        </div>
+                  </div>
+
+            </div>
+      </div><!--./row-->
+
+      <div class="text-center">
+            <a href=""><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>&nbsp;Show more</a>
+      </div>
 
 </div>
 <!--./main container-->

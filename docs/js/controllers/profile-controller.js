@@ -27,6 +27,9 @@ app.controller('profile-controller', function($scope, $rootScope, $location, Mid
     $scope.profileError = false;
     $scope.profileErrorMessage  = '';
 
+    $scope.twitterAccounts = [];
+    $scope.instagramAccounts = [];
+
     // Settings page variables
     $scope.saveButton = 'disabled';
     $scope.settingsError = false;
@@ -58,6 +61,14 @@ app.controller('profile-controller', function($scope, $rootScope, $location, Mid
             $scope.description = response.data.userDetails.details.description;
             $scope.profilePictureUrl = response.data.userDetails.details.profilePictureUrl;
             $scope.accounts = response.data.userDetails.accounts;
+
+            angular.forEach($scope.accounts, function(account, value){
+                if(account.type === 'twitter'){
+                    $scope.twitterAccounts.push(account);
+                }else{
+                    $scope.instagramAccounts.push(account);
+                }
+            });
 
         }else{
 
