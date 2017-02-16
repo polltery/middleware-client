@@ -17,11 +17,44 @@ app.factory('Database', function($log){
         accounts : [
             {
                 type : 'twitter',
-                username : 'exampleTwitter'
+                username : 'exampleTwitter',
+                feeds : [
+                    {
+                        tweet : 'Example tweet 1',
+                        timestamp : '29/11/2019',
+                        likes : 20
+                    },{
+                        tweet : 'Example tweet 2',
+                        timestamp : '11/11/2011',
+                        likes : 5
+                    },{
+                        tweet : 'Example tweet 3',
+                        timestamp : '23/03/2013',
+                        likes : 3
+                    }
+                ]
             },
             {
                 type : 'instagram',
-                username : 'exampleInstagram'
+                username : 'exampleInstagram',
+                feeds : [
+                    {
+                        image : 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Fernando_Alonso_and_Sergio_Perez_2012_Malaysia.jpg/540px-Fernando_Alonso_and_Sergio_Perez_2012_Malaysia.jpg',
+                        timestamp : '29/11/2013',
+                        caption : 'My new car',
+                        likes : 4
+                    },{
+                        image : 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Replica_of_Auburn_Speedster_-_001.jpg/540px-Replica_of_Auburn_Speedster_-_001.jpg',
+                        timestamp : '29/11/2011',
+                        caption : 'My old car',
+                        likes : 5
+                    },{
+                        image : 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/Austin_Six_Saloon_(1932)_GS3184_5902656341.jpg/540px-Austin_Six_Saloon_(1932)_GS3184_5902656341.jpg',
+                        timestamp : '29/11/2012',
+                        caption : 'My new-old car',
+                        likes : 123
+                    }
+                ]
             }
         ]
     }];
