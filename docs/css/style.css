@@ -35,3 +35,9 @@ footer.jumbotron > .container{
 }
 
 }
+
+.scroll-content{
+    height : 750px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}

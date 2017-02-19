@@ -65,7 +65,7 @@ Created on : 13/01/2017
                               <p class="text-center">Please go to your twitter account to post something</p>
                         </div>
 
-                        <div data-ng-if="twitterAccounts[0].feeds.length > 0">
+                        <div data-ng-if="twitterAccounts[0].feeds.length > 0" class="scroll-content">
                               <!--repeat of feeds-->
                               <div class="panel panel-primary" data-ng-repeat="feed in twitterAccounts[0].feeds | filter:{tweet : searchInput}">
                                     <div class="panel-heading">
@@ -79,6 +79,9 @@ Created on : 13/01/2017
                                                 <p class="pull-right">{{feed.timestamp}}</p>
                                           </div>
                                     </div>
+                              </div>
+                              <div class="text-center">
+                                    <a href=""><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>&nbsp;Show more</a>
                               </div>
                         </div>
                   </div>
@@ -108,7 +111,7 @@ Created on : 13/01/2017
                               <p class="text-center">Please go to your twitter account to post something</p>
                         </div>
 
-                        <div class="instagramAccounts[0].feeds.length > 0">
+                        <div data-ng-if="instagramAccounts[0].feeds.length > 0" class="scroll-content">
                               <!--repeat of feeds-->
                               <div class="panel panel-success" data-ng-repeat="feed in instagramAccounts[0].feeds | filter:{caption : searchInput}">
                                     <div class="panel-heading">
@@ -125,15 +128,18 @@ Created on : 13/01/2017
                                           </div>
                                     </div>
                               </div>
+                              <div class="text-center">
+                                    <a href=""><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>&nbsp;Show more</a>
+                              </div>
                         </div>
                   </div>
 
             </div>
       </div><!--./row-->
 
-      <div class="text-center">
-            <a href=""><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>&nbsp;Show more</a>
-      </div>
+      <hr>
+
+      <button type="button" class="btn btn-warning center-block" data-ng-click="changeView('/login')"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>Logout</button>
 
 </div>
 <!--./main container-->
