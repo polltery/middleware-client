@@ -41,3 +41,7 @@ footer.jumbotron > .container{
     overflow-x: hidden;
     overflow-y: scroll;
 }
+
+.glyphicon-heart {
+    color: red;
+}
