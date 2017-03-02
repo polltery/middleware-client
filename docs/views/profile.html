@@ -1,5 +1,5 @@
 <!--
-Author(s) : Balraj Singh Bains
+Author(s) : Balraj Singh Bains, Mark Ericson Ponce Santos
 Created on : 13/01/2017
 -->
 
@@ -65,6 +65,7 @@ Created on : 13/01/2017
                               <p class="text-center">Please go to your Twitter account to post something</p>
                         </div>
 
+                  
                         <div data-ng-if="twitterAccounts[0].feeds.length > 0" class="scroll-content">
                               <!--repeat of feeds-->
                               <div class="panel panel-primary" data-ng-repeat="feed in twitterAccounts[0].feeds | filter:{tweet : searchInput}">
@@ -75,9 +76,13 @@ Created on : 13/01/2017
                                           <p>{{feed.tweet}}</p>
                                           <div>
                                                 <p class="pull-left">
+                                                <video width="400" height="240" controls>
+                                                      <source src="http://techslides.com/demos/sample-videos/small.mp4" type=video/mp4>
+                                                </video>
                                                 <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>&nbsp;{{feed.likes}}</p>
                                                 <p class="pull-right">{{feed.timestamp}}</p>
                                           </div>
+                                    
                                     </div>
                               </div>
                               <div class="text-center">
