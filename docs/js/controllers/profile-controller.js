@@ -1,5 +1,5 @@
 /*
-Author(s) : Balraj Singh Bains
+Author(s) : Balraj Singh Bains, Mark Ericson Ponce Santos
 Date : 14/01/2017
 */
 
@@ -151,13 +151,14 @@ app.controller('profile-controller', function($scope, $rootScope, $location, Mid
     $scope.closeAddAccountError = function(){
         $scope.addAccountError = false;
     };
-
+ 
     $scope.closeAddAccountSuccess = function(){
         $scope.addAccountSuccess = false;
     };
 
     // On remove account 
     $scope.removeAccount = function(type,username){
+        if(confirm("Are you sure you would want to remove the account?")){
         accountDetails = {
             type : type,
             username : username
@@ -172,6 +173,6 @@ app.controller('profile-controller', function($scope, $rootScope, $location, Mid
         }else{
 
         }
-    };
-
+     };
+  };
 });
