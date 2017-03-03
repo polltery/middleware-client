@@ -44,6 +44,20 @@ Created on : 13/01/2017
         </div>
       </div>
 
+      <!-- Select input-->
+      <div class="form-group">
+        <label class="col-sm-4 control-label" for="profile-username">Theme</label>
+        <div class="col-sm-8">
+          <select data-ng-model="theme" name="account-type" id="account-type" class="form-control" data-ng-change="enableSaveButton()">
+                <option value="default">Default</option>
+                <option value="blue">Blue</option>
+                <option value="orange">Orange</option>
+                <option value="green">Green</option>
+                <option value="pink">Pink</option>
+          </select>
+        </div>
+      </div>
+
       <div class="text-center">
         <button type="button" class="btn btn-primary" data-ng-class="saveButton" data-ng-click="saveSettings()"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>Save</button>
         <hr/>

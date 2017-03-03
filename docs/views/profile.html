@@ -12,12 +12,12 @@ Created on : 13/01/2017
 </div>
 
 <!--Profile info-->
-<div data-ng-if="!profileError" class="jumbotron">
+<div data-ng-if="!profileError" class="jumbotron theme" data-ng-class="theme">
       <div class="container text-center">
             <div class="row">
                   <div class="col-xs-4 col-md-4"></div>
                   <div class="col-xs-4 col-md-4">
-                        <a href="" class="thumbnail">
+                        <a href="" class="thumbnail picture-shadow">
                               <img data-ng-src="{{profilePictureUrl}}" alt="profile picture" height="200" width="200">
                         </a>
                   </div>
@@ -64,7 +64,6 @@ Created on : 13/01/2017
                               </h3>
                               <p class="text-center">Please go to your Twitter account to post something</p>
                         </div>
-
                   
                         <div data-ng-if="twitterAccounts[0].feeds.length > 0" class="scroll-content">
                               <!--repeat of feeds-->
@@ -74,11 +73,15 @@ Created on : 13/01/2017
                                     </div>
                                     <div class="panel-body">
                                           <p>{{feed.tweet}}</p>
+
+                                          <!-- display appropriate media based on type of tweet -->
+                                          <img data-ng-if="feed.type === 'image'" data-ng-src="{{feed.source}}" class="img-responsive center-block img-rounded">
+                                          <video data-ng-if="feed.type === 'video'" width="400" height="240" controls>
+                                                <source data-ng-src="{{feed.source}}" type="{{feed.sourceType}}">
+                                          </video>
+
                                           <div>
                                                 <p class="pull-left">
-                                                <video width="400" height="240" controls>
-                                                      <source src="http://techslides.com/demos/sample-videos/small.mp4" type=video/mp4>
-                                                </video>
                                                 <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>&nbsp;{{feed.likes}}</p>
                                                 <p class="pull-right">{{feed.timestamp}}</p>
                                           </div>
@@ -123,7 +126,7 @@ Created on : 13/01/2017
                                           <h3 class="panel-title">{{instagramAccounts[0].username}}</h3>
                                     </div>
                                     <div class="panel-body">
-                                          <img data-ng-src="{{feed.image}}" alt="{{feed.caption}}" class="img-responsive center-block img-rounded">
+                                          <img data-ng-if="feed.type === 'image'" data-ng-src="{{feed.source}}" alt="{{feed.caption}}" class="img-responsive center-block img-rounded">
                                           <p>{{feed.caption}}</p>
                                           <div>
                                                 <p class="pull-left">

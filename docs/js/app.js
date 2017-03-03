@@ -7,7 +7,7 @@ Date : 12/01/2017
 var app = angular.module('network-application', ['ngRoute']);
 
 // Setup routes (config -> run) 
-app.config(function($routeProvider) {
+app.config(function($routeProvider, $sceDelegateProvider) {
 
     $routeProvider
     .when("/", {
@@ -51,6 +51,15 @@ app.config(function($routeProvider) {
                 }
             }
     });
+
+    // Whitelist some urls for video playback
+    $sceDelegateProvider.resourceUrlWhitelist([
+        // Allow same origin resource loads.
+        'self',
+        // Allow loading from our assets domain.  Notice the difference between * and **.
+        'http://techslides.com/demos/sample-videos/**'
+    ]);
+
 
 });
 

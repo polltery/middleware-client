@@ -24,6 +24,8 @@ app.controller('profile-controller', function($scope, $rootScope, $location, Mid
     $scope.description = '';
     $scope.profilePictureUrl = '';
 
+    $scope.theme = 'default';
+
     $scope.profileError = false;
     $scope.profileErrorMessage  = '';
 
@@ -62,6 +64,7 @@ app.controller('profile-controller', function($scope, $rootScope, $location, Mid
             // load user variables
             $scope.description = response.data.userDetails.details.description;
             $scope.profilePictureUrl = response.data.userDetails.details.profilePictureUrl;
+            $scope.theme = response.data.userDetails.details.theme;
             $scope.accounts = response.data.userDetails.accounts;
 
             angular.forEach($scope.accounts, function(account, value){
@@ -91,7 +94,8 @@ app.controller('profile-controller', function($scope, $rootScope, $location, Mid
         if($scope.saveButton !== 'disabled'){
             settings = {
                 description : $scope.description,
-                profilePictureUrl : $scope.profilePictureUrl
+                profilePictureUrl : $scope.profilePictureUrl,
+                theme : $scope.theme
             };
 
             response = MiddlewareApi.updateSettings($scope.username, settings, $rootScope.token);
@@ -173,6 +177,8 @@ app.controller('profile-controller', function($scope, $rootScope, $location, Mid
         }else{
 
         }
-     };
+    }
   };
+
+  
 });
