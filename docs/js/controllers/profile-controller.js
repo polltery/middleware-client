@@ -122,33 +122,14 @@ app.controller('profile-controller', function($scope, $rootScope, $location, Mid
         $scope.settingsSuccess = false;
     };
 
-    // On click of add account button
-    $scope.addAccount = function(){
+    // Connect twitter account
+    $scope.connectTwitter = function(){
 
-        if($scope.addAccountUsername === ''){
-            $scope.addAccountError = true;
-            $scope.addAccountErrorMessage = 'Please add a username';
-        }else{
-            accountDetails = {
-                type : $scope.addAccountType,
-                username : $scope.addAccountUsername
-            };
-            
-            console.log(accountDetails);
+    };
 
-            var response = MiddlewareApi.addAccount($scope.username, accountDetails, $rootScope.token);
-
-            $log.debug(response);
-
-            if(response.code === 200){
-                $scope.addAccountSuccess = true;
-                $scope.addAccountSuccessMessage = 'Account added successfully';
-            
-            }else{
-                $scope.addAccountError = true;
-                $scope.addAccountErrorMessage = response.error;
-            }
-        }
+    // Connect Instagram account
+    $scope.connectInstagram = function(){
+        MiddlewareApi.connectInstagram($scope.username);
     };
 
     // On close of error and success section
@@ -159,26 +140,6 @@ app.controller('profile-controller', function($scope, $rootScope, $location, Mid
     $scope.closeAddAccountSuccess = function(){
         $scope.addAccountSuccess = false;
     };
-
-    // On remove account 
-    $scope.removeAccount = function(type,username){
-        if(confirm("Are you sure you would want to remove the account?")){
-        accountDetails = {
-            type : type,
-            username : username
-        };
-
-        var response = MiddlewareApi.removeAccount($scope.username, accountDetails, $rootScope.token);
-
-        $log.debug(response);
-
-        if(response.code === 200){
-
-        }else{
-
-        }
-    }
-  };
 
   
 });

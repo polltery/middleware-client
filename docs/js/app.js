@@ -50,6 +50,19 @@ app.config(function($routeProvider, $sceDelegateProvider) {
                     }
                 }
             }
+    })
+    
+    .when("/:access_token",{
+        resolve : {
+            catchToken : function($log, $route, $location){
+                // apply regex on string to get the token
+                var instagramAccessToken = $route.current.params.access_token.split(/access_token=/i);
+                // String is split, and token is stored in instagramAccessToken[1]
+                $log.debug(instagramAccessToken[1]);
+                // #TODO : Send token to backend
+                $location.path('/profile/');
+            }
+        }
     });
 
     // Whitelist some urls for video playback

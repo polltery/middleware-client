@@ -19,7 +19,7 @@ response = {
 */
 
 // Angular Service acting as a middleware
-app.factory('MiddlewareApi', function(Database){
+app.factory('MiddlewareApi', function(Database, $http, $q, $log){
 
     // Gets user details
     function getUserDetails(username, token){
@@ -231,6 +231,25 @@ app.factory('MiddlewareApi', function(Database){
         return response;
     }
 
+    // Connect to instagram account 
+    function connectInstagram(username){
+
+        // Get instagram client properties
+        var clientId = window.ENV.instagramClient.clientId;
+        var redirectUri = window.ENV.instagramClient.redirectUri;
+        var responseType = window.ENV.instagramClient.responseType;
+        var scope = window.ENV.instagramClient.scope;
+
+        var url = "https://www.instagram.com/oauth/authorize?client_id="+clientId+"&redirect_uri="+redirectUri+"&response_type="+responseType+"&scope="+scope;
+
+        window.open(url,'_self',false);
+
+        // open window in new tab
+        // set redirect to page and setup angular controller to catch access token and send it to the middleware
+        // close the window
+
+    }
+
     return {
         getUserDetails : getUserDetails,
         login : login,
@@ -238,7 +257,8 @@ app.factory('MiddlewareApi', function(Database){
         authenticate : authenticate,
         updateSettings : updateSettings,
         addAccount : addAccount,
-        removeAccount : removeAccount
+        removeAccount : removeAccount,
+        connectInstagram : connectInstagram
     };
 
 });
