@@ -240,13 +240,12 @@ app.factory('MiddlewareApi', function(Database, $http, $q, $log){
         var responseType = window.ENV.instagramClient.responseType;
         var scope = window.ENV.instagramClient.scope;
 
-        var url = "https://www.instagram.com/oauth/authorize?client_id="+clientId+"&redirect_uri="+redirectUri+"&response_type="+responseType+"&scope="+scope;
+        // Construct a url
+        var url = "https://www.instagram.com/oauth/authorize?client_id="+clientId+"&redirect_uri="+encodeURIComponent(redirectUri)+"&response_type="+responseType+"&scope="+scope;
 
+        // Open url
         window.open(url,'_self',false);
 
-        // open window in new tab
-        // set redirect to page and setup angular controller to catch access token and send it to the middleware
-        // close the window
 
     }
 

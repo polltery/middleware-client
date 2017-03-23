@@ -44,6 +44,8 @@ app.controller('login-controller', function($scope, $location, $rootScope, Middl
             if(response.code === 200){
                 $rootScope.token = response.data.token;
                 $scope.changeView('/profile/'+$scope.loginUsername);
+                // save user in session storage (read more here https://www.w3schools.com/html/html5_webstorage.asp)
+                window.sessionStorage.setItem('socialHubUser',username);
             }else{
                 $scope.loginError = true;
                 $scope.loginErrorMessage = response.error;

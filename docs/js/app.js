@@ -9,6 +9,10 @@ var app = angular.module('network-application', ['ngRoute']);
 // Setup routes (config -> run) 
 app.config(function($routeProvider, $sceDelegateProvider) {
 
+    // For default example purposes we store a username in the sessionStorage
+    // save user in session storage (read more here https://www.w3schools.com/html/html5_webstorage.asp)
+    window.sessionStorage.setItem('socialHubUser','example');
+
     $routeProvider
     .when("/", {
         templateUrl : "views/overview.html",
@@ -59,8 +63,10 @@ app.config(function($routeProvider, $sceDelegateProvider) {
                 var instagramAccessToken = $route.current.params.access_token.split(/access_token=/i);
                 // String is split, and token is stored in instagramAccessToken[1]
                 $log.debug(instagramAccessToken[1]);
+                // Get the username from cache to set redirect path
+                var username = window.sessionStorage.getItem('socialHubUser');
                 // #TODO : Send token to backend
-                $location.path('/profile/');
+                $location.path('/profile/'+username);
             }
         }
     });
