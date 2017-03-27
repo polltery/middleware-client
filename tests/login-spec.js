@@ -51,6 +51,25 @@ describe('Middleware login page: ', function(){
 
   });
 
+    //Description of this test
+  it('Should signup in a new user', function(){
+
+    // Browser gets the given url
+    browser.get('https://polltery.github.io/middleware-frontend/index.html#/login');
+
+    // Set the form variables (example, example) is already set
+    element(by.model('signupUsername')).sendKeys('newExample');
+    element(by.model('signupPassword')).sendKeys('example');
+
+    // Check function below for details
+    waitForButtonClickableThenClick('signup-submit');
+
+    // Expect the browser to go to user profile
+    expect(browser.getCurrentUrl()).toEqual('https://polltery.github.io/middleware-frontend/index.html#/profile/newExample'); 
+
+  });
+
+
 
   //Description of this test
   it('Should not signup if username or password are invalid', function(){
