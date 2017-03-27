@@ -27,11 +27,16 @@ webdriver-manager start
 
 This will start up a Selenium Server and will output a bunch of info logs. Your Protractor test will send requests to this server to control a local browser. Leave this server running throughout the tutorial. You can see information about the status of the server at ```http://localhost:4444/wd/hub.```
 
+To test for console errors in chrome, please install the [protractor-console-plugin](https://www.npmjs.com/package/protractor-console-plugin) plug-in using the following command (or else you can remove the plugin from ```conf.js```)
+```
+npm i protractor-console-plugin
+```
+
 Project Structure
 ---
 
 - ```conf.js``` is the file containing the configuration for protractor
-- The tests are defined in the spec files. The ```login-spec.js``` contains the spec for login.
+- The tests are defined in the spec files. The ```login-spec.js``` contains the spec(s) for login.
 - You can add specs in ```tests``` folder for each page.
 
 How to run a test?

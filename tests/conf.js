@@ -16,5 +16,10 @@ exports.config = {
   // check http://www.protractortest.org/#/tutorial#step-3-changing-the-configuration for more
   capabilities: {
     browserName: 'chrome'
-  }
+  }, 
+
+  // For chrome only, Remove this if you don't want to test for console error
+  plugins: [{
+    path: '../node_modules/protractor-console-plugin/index.js'
+  }]
 };
