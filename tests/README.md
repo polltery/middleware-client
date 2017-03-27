@@ -37,6 +37,11 @@ Project Structure
 How to run a test?
 ---
 
+Make sure you have the server running. You can start the server using this command.
+```
+webdriver-manager start
+```
+
 Given that you are in the ```tests``` folder, run the test using the following command
 ```
 protractor conf.js
