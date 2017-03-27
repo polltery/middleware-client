@@ -4,9 +4,8 @@
 */
 
 // First testset description
-describe('Middleware login', function(){
+describe('Middleware login page: ', function(){
 
-var EC = protractor.ExpectedConditions;
 
   // description of this test
   it('Should give error when non-user logs in', function(){
@@ -14,19 +13,8 @@ var EC = protractor.ExpectedConditions;
     // Browser gets the given url
     browser.get('https://polltery.github.io/middleware-frontend/index.html#/login');
 
-    // Set the form variables
-    element(by.model('loginUsername')).sendKeys('dummyUsername');
-    element(by.model('loginPassword')).sendKeys('examplePassword');
-
-    // Waiting for the button to be clickable solution from http://stackoverflow.com/questions/36871071/click-function-isnt-working-in-protractor-scripts
-    // Get the login button in a variable
-    var loginButton = element(by.id('login-submit'));
-    
-    // Wait for it to be clickable
-    browser.wait(EC.elementToBeClickable(loginButton), 5000);
-    
-    // Click the login button that was saved before
-    loginButton.click();
+    // Check function below for details
+    waitForButtonClickableThenClick('login-submit');
 
     // Login error should available now to be selected because we are using ng-if=loginError for this element to be displayed
     var loginError = element(by.css('.login-form > div:last-child > div:last-child'));
@@ -44,6 +32,7 @@ var EC = protractor.ExpectedConditions;
     });
   });
 
+
   //Description of this test
   it('Should log in a registered user', function(){
 
@@ -54,18 +43,73 @@ var EC = protractor.ExpectedConditions;
     element(by.model('loginUsername')).sendKeys('example');
     element(by.model('loginPassword')).sendKeys('example');
 
-    // Waiting for the button to be clickable solution from http://stackoverflow.com/questions/36871071/click-function-isnt-working-in-protractor-scripts
-    // Get the login button in a variable
-    var loginButton = element(by.id('login-submit'));
-
-    // Wait for it to be clickable
-    browser.wait(EC.elementToBeClickable(loginButton), 5000);
-
-    // Click the login button that was saved before
-    loginButton.click();
+    // Check function below for details
+    waitForButtonClickableThenClick('login-submit');
 
     // Expect the browser to go to user profile
     expect(browser.getCurrentUrl()).toEqual('https://polltery.github.io/middleware-frontend/index.html#/profile/example'); 
 
   });
+
+
+  //Description of this test
+  it('Should not signup if username or password are invalid', function(){
+
+    // Browser gets the given url
+    browser.get('https://polltery.github.io/middleware-frontend/index.html#/login');
+
+    // Test case 1: no username, no password. Should stay on same page when signed up.    
+    // Set the form variables
+    element(by.model('signupUsername')).sendKeys('');
+    element(by.model('signupPassword')).sendKeys('');
+
+    // Click sign up button
+    waitForButtonClickableThenClick('signup-submit');
+
+    // Check page url
+    expect(browser.getCurrentUrl()).toEqual('https://polltery.github.io/middleware-frontend/index.html#/login'); 
+
+    // Check class of form elements
+    expect(hasClass(element(by.id('signup-username')), 'ng-invalid-required')).toBeTruthy();
+    expect(hasClass(element(by.id('signup-password')), 'ng-invalid-required')).toBeTruthy();
+
+    // Test case 2, invalid patterns
+    // Set the form variables
+    element(by.model('signupUsername')).sendKeys('AS*C*(EUifhesbj');
+    element(by.model('signupPassword')).sendKeys('asdasd');
+
+    // Click sign up button
+    waitForButtonClickableThenClick('signup-submit');
+
+    // Check page url
+    expect(browser.getCurrentUrl()).toEqual('https://polltery.github.io/middleware-frontend/index.html#/login'); 
+
+    // Check class of form elements
+    expect(hasClass(element(by.id('signup-username')), 'ng-invalid-pattern')).toBeTruthy();
+
+  });
+
+  // Helper function: waits for a button to be clickable and then clicks it.
+  function waitForButtonClickableThenClick(buttonId){
+    var EC = protractor.ExpectedConditions;
+
+    // Waiting for the button to be clickable solution from http://stackoverflow.com/questions/36871071/click-function-isnt-working-in-protractor-scripts
+    // Get the login button in a variable
+    var button = element(by.id(buttonId));
+
+    // Wait for it to be clickable
+    browser.wait(EC.elementToBeClickable(button), 5000);
+
+    // Click the login button that was saved before
+    button.click();
+  }
+
+
+  // Helper function: Checks if an element has a given class
+  var hasClass = function (element, cls) {
+    return element.getAttribute('class').then(function (classes) {
+        return classes.split(' ').indexOf(cls) !== -1;
+    });
+};
+
 });
