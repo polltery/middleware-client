@@ -89,6 +89,45 @@ describe('Middleware login page: ', function(){
 
   });
 
+
+  //Description of this test
+  it('Should not login if username or password are invalid', function(){
+
+    // Browser gets the given url
+    browser.get('https://polltery.github.io/middleware-frontend/index.html#/login');
+
+    // Test case 1: no username, no password. Should stay on same page when signed up.    
+    // Set the form variables
+    element(by.model('loginUsername')).sendKeys('');
+    element(by.model('loginPassword')).sendKeys('');
+
+    // Click sign up button
+    waitForButtonClickableThenClick('login-submit');
+
+    // Check page url
+    expect(browser.getCurrentUrl()).toEqual('https://polltery.github.io/middleware-frontend/index.html#/login'); 
+
+    // Check class of form elements
+    expect(hasClass(element(by.id('login-username')), 'ng-invalid-required')).toBeTruthy();
+    expect(hasClass(element(by.id('login-password')), 'ng-invalid-required')).toBeTruthy();
+
+    // Test case 2, invalid patterns
+    // Set the form variables
+    element(by.model('loginUsername')).sendKeys('AS*C*(EUifhesbj');
+    element(by.model('loginPassword')).sendKeys('asdasd');
+
+    // Click sign up button
+    waitForButtonClickableThenClick('login-submit');
+
+    // Check page url
+    expect(browser.getCurrentUrl()).toEqual('https://polltery.github.io/middleware-frontend/index.html#/login'); 
+
+    // Check class of form elements
+    expect(hasClass(element(by.id('login-username')), 'ng-invalid-pattern')).toBeTruthy();
+
+  });
+
+
   // Helper function: waits for a button to be clickable and then clicks it.
   function waitForButtonClickableThenClick(buttonId){
     var EC = protractor.ExpectedConditions;
