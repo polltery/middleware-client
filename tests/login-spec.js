@@ -127,6 +127,34 @@ describe('Middleware login page: ', function(){
 
   });
 
+  //Description of this test
+  it('Should not signup if username already exists', function(){
+    
+    // Browser gets the given url
+    browser.get('https://polltery.github.io/middleware-frontend/index.html#/login');
+
+    // Set the form variables
+    element(by.model('signupUsername')).sendKeys('example');
+    element(by.model('signupPassword')).sendKeys('example');
+
+    // Signup error should available now to be selected because we are using ng-if=signupError for this element to be displayed
+    var signupError = element(by.css('.signup-form > div:last-child > div:last-child'));
+
+    // Do something is signupError is present
+    signupError.isPresent().then(function(present){
+      if(present){
+
+        // Because we are using ng-if we evaluate the signupError value to be truthy
+        expect(loginError.evalute('signupError')).toBeTruthy();
+
+        // Expect given text
+        expect(statusId.getText()).toContain("User already exists");
+      }
+    });
+
+
+  });
+
 
   // Helper function: waits for a button to be clickable and then clicks it.
   function waitForButtonClickableThenClick(buttonId){
