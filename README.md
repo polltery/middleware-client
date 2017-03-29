@@ -34,6 +34,11 @@ External files and their purpose
 
 Note: All external files must be linked to a CDN, and not hosted.
 
+**Note:** You might get an error related to Cross-origin resource sharing. You may use [a chrome plugin](https://chrome.google.com/webstore/detail/allow-control-allow-origi/nlfbmbojpeacfghkpbjhddihlkkiljbi) to solve this
+```
+XMLHttpRequest cannot load http://esb1.marcura-fze.com/dadesk-api/1.5/... No 'Access-Control-Allow-Origin' header is present on the requested resource. Origin 'http://localhost:8080' is therefore not allowed access.
+```
+
 ## Contributors
 - Azeem
 - Apeqsha
