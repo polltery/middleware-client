@@ -21,6 +21,9 @@ response = {
 // Angular Service acting as a middleware
 app.factory('MiddlewareApi', function(Database, $http, $q, $log){
 
+    // Get api url
+    var API = window.ENV.apiUrl;
+
     // Gets user details
     function getUserDetails(username, token){
 
@@ -53,61 +56,49 @@ app.factory('MiddlewareApi', function(Database, $http, $q, $log){
     // Logs a user in and starts a session
     function login(username, password){
 
-        var response = {
-            code : 200
+        var deferred = $q.defer();
+
+        var payload = {
+            "username" : username,
+            "password" : password
         };
 
-        var userDetails = Database.getUser(username);
+        var url = API+'/loginUser';
 
-        // Check if user exists
-        if(userDetails !== undefined){
+        $http.post(url,payload)
+            .success(function(data){
+                deferred.resolve(data);
+            })
+            .error(function(data){
+                deferred.reject(data);
+            });
 
-            // check password if user exists
-            if(userDetails.password === password){
-                Database.setToken(username,'online');
-                response.data = {
-                    token : 'online'
-                };
+        return deferred.promise;
 
-            }else{
-                response.code = 400;
-                response.error = 'Invalid password';
-            }
-
-        }else{
-            response.code = 400;
-            response.error = 'User not found';
-        }
-        return response;
     }
 
     // Signup for user
     function signUp(username, password){
 
-        var response = {
-            code : 200
+        var deferred = $q.defer();
+
+        var payload = {
+            "username" : username,
+            "password" : password
         };
 
-        // Check if user is new
-        if(Database.getUser(username) !== undefined){
+        var url = API+'/registerUser';
 
-            response.code = 400;
-            response.error = 'User already exists';
+        $http.post(url, JSON.stringify(payload))
+            .success(function(data){
+                deferred.resolve(data);
+            })
+            .error(function(data){
+                deferred.reject(data);
+            });
 
-        }else{
+        return deferred.promise;
 
-            // Add a new user
-            Database.addUser(username,password);
-
-            // login the user
-            Database.setToken(username,'online');
-            response.data = {
-                token : 'online'
-            };
-        
-        }
-
-        return response;
     }
 
     // Authenticate

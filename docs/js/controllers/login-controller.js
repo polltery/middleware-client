@@ -16,7 +16,7 @@ app.controller('login-controller', function($scope, $location, $rootScope, Middl
     // Form variables
     $scope.loginUsername;
     $scope.loginPassword;
-    $scope.signupUsernam;
+    $scope.signupUsername;
     $scope.signupPassword;
 
     // Error variables
@@ -36,21 +36,29 @@ app.controller('login-controller', function($scope, $location, $rootScope, Middl
 
         if($scope.loginForm.$valid){
 
-            // Get a login response
-            response = MiddlewareApi.login($scope.loginUsername, $scope.loginPassword);
+            MiddlewareApi.login($scope.loginUsername, $scope.loginPassword)
+                .then(function(data){
 
-            $log.debug(response);
+                    $log.debug(data);
 
-            if(response.code === 200){
-                $rootScope.token = response.data.token;
-                $scope.changeView('/profile/'+$scope.loginUsername);
-                // save user in session storage (read more here https://www.w3schools.com/html/html5_webstorage.asp)
-                window.sessionStorage.setItem('socialHubUser',$scope.loginUsername);
-            }else{
-                $scope.loginError = true;
-                $scope.loginErrorMessage = response.error;
-            }
+                    if(data.success){
 
+                        // Set token
+                        $rootScope.token = data.token;
+                        
+                        // Add token to localStorage
+                        window.sessionStorage.setItem('socialHubUser',$scope.loginUsername);
+                        window.sessionStorage.setItem('socialHubUserToken',data.token);
+
+                        // Change view
+                        $scope.changeView('/profile/'+$scope.loginUsername);
+                    }else{
+                        // Show error message
+                        $scope.loginError = true;
+                        $scope.loginErrorMessage = data.message;
+                    }
+
+                });
         }
     };
 
@@ -59,18 +67,47 @@ app.controller('login-controller', function($scope, $location, $rootScope, Middl
 
         if($scope.signupForm.$valid){
 
-            // Get a response
-            response = MiddlewareApi.signUp($scope.signupUsername, $scope.signupPassword);
+            // Initiate signup
+            MiddlewareApi.signUp($scope.signupUsername)
+                .then(function(data){
 
-            $log.debug(response);
+                    $log.debug(data);
 
-            if(response.code === 200){
-                $rootScope.token = response.data.token;
-                $scope.changeView('/profile/'+$scope.signupUsername);
-            }else{
-                $scope.signupError = true;
-                $scope.signupErrorMessage = response.error;
-            }
+                    if(data.success){
+
+                        // Login the user on successful signup
+                        MiddlewareApi.login($scope.signupUsername, $scope.signupPassword)
+                            .then(function(data){
+
+                                $log.debug(data);
+
+                                if(data.success){
+
+                                    // Set token
+                                    $rootScope.token = data.token;
+                                    
+                                    // Add token to localStorage
+                                    window.sessionStorage.setItem('socialHubUser',$scope.signupUsername);
+                                    window.sessionStorage.setItem('socialHubUserToken',data.token);
+
+                                    // Change view
+                                    $scope.changeView('/profile/'+$scope.signupUsername);
+
+                                }else{
+                                    // Show error message
+                                    $scope.loginError = true;
+                                    $scope.loginErrorMessage = data.message;
+                                }
+
+                            });
+                    }else{
+
+                        // Show error message
+                        $scope.signupError = true;
+                        $scope.signupErrorMessage = data.message;
+                    }
+
+                });
 
         }
     };
