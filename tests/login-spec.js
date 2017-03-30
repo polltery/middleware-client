@@ -3,15 +3,16 @@
     Date : 27/03/2017
 */
 
+var url = 'https://polltery.github.io/middleware-frontend';
+
 // First testset description
 describe('Middleware login page: ', function(){
-
 
   // description of this test
   it('Should give error when non-user logs in', function(){
 
     // Browser gets the given url
-    browser.get('https://polltery.github.io/middleware-frontend/index.html#/login');
+    browser.get(url+'/index.html#/login');
 
     // Check function below for details
     waitForButtonClickableThenClick('login-submit');
@@ -37,7 +38,7 @@ describe('Middleware login page: ', function(){
   it('Should log in a registered user', function(){
 
     // Browser gets the given url
-    browser.get('https://polltery.github.io/middleware-frontend/index.html#/login');
+    browser.get(url+'/index.html#/login');
 
     // Set the form variables (example, example) is already set
     element(by.model('loginUsername')).sendKeys('example');
@@ -47,7 +48,7 @@ describe('Middleware login page: ', function(){
     waitForButtonClickableThenClick('login-submit');
 
     // Expect the browser to go to user profile
-    expect(browser.getCurrentUrl()).toEqual('https://polltery.github.io/middleware-frontend/index.html#/profile/example'); 
+    expect(browser.getCurrentUrl()).toEqual(url+'/index.html#/profile/example'); 
 
   });
 
@@ -55,7 +56,7 @@ describe('Middleware login page: ', function(){
   it('Should signup in a new user', function(){
 
     // Browser gets the given url
-    browser.get('https://polltery.github.io/middleware-frontend/index.html#/login');
+    browser.get(url+'/index.html#/login');
 
     // Set the form variables (example, example) is already set
     element(by.model('signupUsername')).sendKeys('newExample');
@@ -65,7 +66,7 @@ describe('Middleware login page: ', function(){
     waitForButtonClickableThenClick('signup-submit');
 
     // Expect the browser to go to user profile
-    expect(browser.getCurrentUrl()).toEqual('https://polltery.github.io/middleware-frontend/index.html#/profile/newExample'); 
+    expect(browser.getCurrentUrl()).toEqual(url+'/index.html#/profile/newExample'); 
 
   });
 
@@ -75,7 +76,7 @@ describe('Middleware login page: ', function(){
   it('Should not signup if username or password are invalid', function(){
 
     // Browser gets the given url
-    browser.get('https://polltery.github.io/middleware-frontend/index.html#/login');
+    browser.get(url+'index.html#/login');
 
     // Test case 1: no username, no password. Should stay on same page when signed up.    
     // Set the form variables
@@ -86,7 +87,7 @@ describe('Middleware login page: ', function(){
     waitForButtonClickableThenClick('signup-submit');
 
     // Check page url
-    expect(browser.getCurrentUrl()).toEqual('https://polltery.github.io/middleware-frontend/index.html#/login'); 
+    expect(browser.getCurrentUrl()).toEqual(url+'/index.html#/login'); 
 
     // Check class of form elements
     expect(hasClass(element(by.id('signup-username')), 'ng-invalid-required')).toBeTruthy();
@@ -101,7 +102,7 @@ describe('Middleware login page: ', function(){
     waitForButtonClickableThenClick('signup-submit');
 
     // Check page url
-    expect(browser.getCurrentUrl()).toEqual('https://polltery.github.io/middleware-frontend/index.html#/login'); 
+    expect(browser.getCurrentUrl()).toEqual(url+'index.html#/login'); 
 
     // Check class of form elements
     expect(hasClass(element(by.id('signup-username')), 'ng-invalid-pattern')).toBeTruthy();
@@ -113,7 +114,7 @@ describe('Middleware login page: ', function(){
   it('Should not login if username or password are invalid', function(){
 
     // Browser gets the given url
-    browser.get('https://polltery.github.io/middleware-frontend/index.html#/login');
+    browser.get(url+'/index.html#/login');
 
     // Test case 1: no username, no password. Should stay on same page when signed up.    
     // Set the form variables
@@ -124,7 +125,7 @@ describe('Middleware login page: ', function(){
     waitForButtonClickableThenClick('login-submit');
 
     // Check page url
-    expect(browser.getCurrentUrl()).toEqual('https://polltery.github.io/middleware-frontend/index.html#/login'); 
+    expect(browser.getCurrentUrl()).toEqual(url+'/index.html#/login'); 
 
     // Check class of form elements
     expect(hasClass(element(by.id('login-username')), 'ng-invalid-required')).toBeTruthy();
@@ -139,7 +140,7 @@ describe('Middleware login page: ', function(){
     waitForButtonClickableThenClick('login-submit');
 
     // Check page url
-    expect(browser.getCurrentUrl()).toEqual('https://polltery.github.io/middleware-frontend/index.html#/login'); 
+    expect(browser.getCurrentUrl()).toEqual(url+'/index.html#/login'); 
 
     // Check class of form elements
     expect(hasClass(element(by.id('login-username')), 'ng-invalid-pattern')).toBeTruthy();
@@ -150,7 +151,7 @@ describe('Middleware login page: ', function(){
   it('Should not signup if username already exists', function(){
     
     // Browser gets the given url
-    browser.get('https://polltery.github.io/middleware-frontend/index.html#/login');
+    browser.get(url+'/index.html#/login');
 
     // Set the form variables
     element(by.model('signupUsername')).sendKeys('example');
