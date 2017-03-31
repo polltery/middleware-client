@@ -3,7 +3,7 @@
     Date : 27/03/2017
 */
 
-var url = 'https://polltery.github.io/middleware-frontend';
+var url = 'http://localhost:8080/docs';
 
 // First testset description
 describe('Middleware login page: ', function(){
@@ -76,7 +76,7 @@ describe('Middleware login page: ', function(){
   it('Should not signup if username or password are invalid', function(){
 
     // Browser gets the given url
-    browser.get(url+'index.html#/login');
+    browser.get(url+'/index.html#/login');
 
     // Test case 1: no username, no password. Should stay on same page when signed up.    
     // Set the form variables
@@ -102,7 +102,7 @@ describe('Middleware login page: ', function(){
     waitForButtonClickableThenClick('signup-submit');
 
     // Check page url
-    expect(browser.getCurrentUrl()).toEqual(url+'index.html#/login'); 
+    expect(browser.getCurrentUrl()).toEqual(url+'/index.html#/login'); 
 
     // Check class of form elements
     expect(hasClass(element(by.id('signup-username')), 'ng-invalid-pattern')).toBeTruthy();
