@@ -161,13 +161,38 @@ app.factory('MiddlewareApi', function($http, $q, $log){
 
     }
 
+    function logout(username){
+        var deferred = $q.defer();
+
+        // Get token
+        var token = window.sessionStorage.getItem("socialHubUserToken");
+
+        var payload = {
+            username : username,
+            token : token
+        };
+
+        var url = API+'/logout';
+
+        $http.post(url, JSON.stringify(payload))
+            .success(function(data){
+                deferred.resolve(data);
+            })
+            .error(function(data){
+                deferred.reject(data);
+            });
+
+        return deferred.promise;
+    }
+
     return {
         getUserDetails : getUserDetails,
         login : login,
         signUp : signUp,
         authenticate : authenticate,
         updateSettings : updateSettings,
-        connectInstagram : connectInstagram
+        connectInstagram : connectInstagram,
+        logout: logout
     };
 
 });

@@ -130,5 +130,22 @@ app.controller('profile-controller', function($scope, $rootScope, $location, Mid
         $scope.addAccountSuccess = false;
     };
 
+    // Logout function
+    $scope.logout = function(){
+
+        MiddlewareApi.logout($scope.username)
+            .then(function(data){
+                $log.debug(data);
+                if(data.success){
+                    window.sessionStorage.removeItem("socialHubUser");
+                    window.sessionStorage.removeItem("socialHubUserToken");
+                    $scope.changeView('/login');
+                }else{
+                    $scope.profileError = true;
+                    $scope.profileErrorMessage = data.errorMessage;
+                }
+            });
+
+    };
   
 });
