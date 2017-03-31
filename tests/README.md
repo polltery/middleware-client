@@ -42,6 +42,8 @@ Project Structure
 How to run a test?
 ---
 
+**NOTE: Please make sure ```example``` user is already in the MongoDB database with password ```password``` and the mule server is running along with mongoDB.**
+
 Make sure you have the server running. You can start the server using this command.
 ```
 webdriver-manager start
