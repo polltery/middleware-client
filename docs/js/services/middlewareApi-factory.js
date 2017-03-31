@@ -2,23 +2,9 @@
 Author(s) : Balraj Singh Bains
 Date : 14/01/2017
 
-Each function takes in parameters and gives a response.
-
-Check on the controller if the response is 200 or 400.
-
-200 is for sucess and 400 is for error
-
-the data structure is
-
-response = {
-    code : 200 or 400
-    error (if 400) : 'error message'
-    data (if 200) : JSON containing the data
-}
-
 */
 
-// Angular Service acting as a middleware
+// Angular Service to interact with middleware
 app.factory('MiddlewareApi', function($http, $q, $log){
 
     // Get api url
@@ -173,6 +159,54 @@ app.factory('MiddlewareApi', function($http, $q, $log){
         };
 
         var url = API+'/logout';
+
+        $http.post(url, JSON.stringify(payload))
+            .success(function(data){
+                deferred.resolve(data);
+            })
+            .error(function(data){
+                deferred.reject(data);
+            });
+
+        return deferred.promise;
+    }
+
+    // Send instagram token to server
+    function authorizeInstagram(username, instagramToken){
+        var deferred = $q.defer();
+
+        // Get token
+        var token = window.sessionStorage.getItem("socialHubUserToken");
+
+        var payload = {
+            instagramToken : instagramToken
+        };
+
+        var url = API+'/authorizeInstagram/'+username+'?token='+token;
+
+        $http.post(url, JSON.stringify(payload))
+            .success(function(data){
+                deferred.resolve(data);
+            })
+            .error(function(data){
+                deferred.reject(data);
+            });
+
+        return deferred.promise;
+    }
+
+    // Send twitter username to server
+    function authorizeTwitter(username, twitterUsername){
+        var deferred = $q.defer();
+
+        // Get token
+        var token = window.sessionStorage.getItem("socialHubUserToken");
+
+        var payload = {
+            twitterUsername : twitterUsername
+        };
+
+        var url = API+'/authorizeInstagram/'+username+'?token='+token;
 
         $http.post(url, JSON.stringify(payload))
             .success(function(data){
