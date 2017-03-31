@@ -3,11 +3,11 @@
 ## About
 Front-end for Network application coursework (Middleware services). The front-end will contain interface for the middleware services.
 
-Please visit [here](https://polltery.github.io/middleware-frontend/docs/index.html#/) for frontend demo.
+Please visit [here](https://polltery.github.io/middleware-client/docs/index.html#/) for frontend demo.
 
 ## Getting started
 
-1. Clone repo ``` git clone https://github.com/polltery/middleware-frontend.git```
+1. Clone repo ``` git clone https://github.com/polltery/middleware-client.git```
 2. Run it on any server
 
 ## Making changes
