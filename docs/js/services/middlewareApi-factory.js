@@ -19,37 +19,30 @@ response = {
 */
 
 // Angular Service acting as a middleware
-app.factory('MiddlewareApi', function(Database, $http, $q, $log){
+app.factory('MiddlewareApi', function($http, $q, $log){
 
     // Get api url
     var API = window.ENV.apiUrl;
 
     // Gets user details
-    function getUserDetails(username, token){
+    function getUserDetails(username){
 
-        var response = {
-            code : 200
-        };
+        var deferred = $q.defer();
 
-        var auth = authenticate(username, token);
+        // Get token
+        var token = window.sessionStorage.getItem("socialHubUserToken");
 
-        if(auth.code === 200){
-            var userDetails = Database.getUser(username);
+        var url = API+'/userDetails/'+username+'?token='+token;
 
-            if(userDetails !== undefined){
-                response.data = {
-                    userDetails : userDetails
-                };
-            }else{
-                response.code = 400;
-                response.error = 'user was not found';
-            }
+        $http.get(url)
+            .success(function(data){
+                deferred.resolve(data);
+            })
+            .error(function(data){
+                deferred.reject(data);
+            });
 
-        }else{
-            return auth;
-        }
-
-        return response;
+        return deferred.promise;
 
     }
 
@@ -59,8 +52,8 @@ app.factory('MiddlewareApi', function(Database, $http, $q, $log){
         var deferred = $q.defer();
 
         var payload = {
-            "username" : username,
-            "password" : password
+            username : username,
+            password : password
         };
 
         var url = API+'/loginUser';
@@ -83,8 +76,8 @@ app.factory('MiddlewareApi', function(Database, $http, $q, $log){
         var deferred = $q.defer();
 
         var payload = {
-            "username" : username,
-            "password" : password
+            username : username,
+            password : password
         };
 
         var url = API+'/registerUser';
@@ -102,125 +95,53 @@ app.factory('MiddlewareApi', function(Database, $http, $q, $log){
     }
 
     // Authenticate
-    function authenticate(username, token){
+    function authenticate(username){
+        var deferred = $q.defer();
 
-        var response = {
-            code : 200
+        // Get token
+        var token = window.sessionStorage.getItem("socialHubUserToken");
+
+        var payload = {
+            username : username,
+            token : token
         };
 
-        if(Database.getToken(username) === token){
-            response.code = 200;
-        }else{
-            response.code = 400;
-            response.error = 'Authentication failed';
-        }
-        return response;
+        var url = API+'/authenticate';
+
+        $http.post(url, JSON.stringify(payload))
+            .success(function(data){
+                deferred.resolve(data);
+            })
+            .error(function(data){
+                deferred.reject(data);
+            });
+
+        return deferred.promise;
     }
 
-    function updateSettings(username, settings, token){
+    function updateSettings(username, settings){
+        var deferred = $q.defer();
 
-        var response = {
-            code : 200
+        var payload = {
+            details: settings
         };
 
-        var auth = authenticate(username, token);
+        // Get token
+        var token = window.sessionStorage.getItem("socialHubUserToken");
 
-        if(auth.code === 200){
+        var url = API+'/userDetails/'+username+'?token='+token;
 
-            var userDetails = Database.getUser(username);
+        $http.put(url, JSON.stringify(payload))
+            .success(function(data){
+                deferred.resolve(data);
+            })
+            .error(function(data){
+                deferred.reject(data);
+            });
 
-            if(userDetails !== undefined){
-                console.log(settings);
-                Database.setDetails(username, settings);
-                response.code = 200;
-            }else{
-                response.code = 400;
-                response.error = 'user was not found';
-            }
-
-        }else{
-            return auth;
-        }
-
-        return response;
-
+        return deferred.promise;
     }
 
-    function addAccount(username, accountDetails, token){
-        var response = {
-            code : 200
-        };
-
-        var auth = authenticate(username, token);
-
-        if(auth.code === 200){
-            var userDetails = Database.getUser(username);
-
-            if(userDetails !== undefined){
-
-                var accountExsits = false;
-                angular.forEach(userDetails.accounts, function(account, value){
-                    if(accountDetails.type === account.type && accountDetails.username === account.username){
-                        accountExsits = true;
-                    }
-                });
-
-                if(accountExsits){
-                    response.code = 400;
-                    response.error = 'The account you are trying to add already exists';
-                }else{
-                    Database.addAccount(username, accountDetails);
-                }
-            }else{
-                response.code = 400;
-                response.error = 'user was not found';
-            }
-
-        }else{
-            return auth;
-        }
-
-        return response;
-    }
-
-    function removeAccount(username, accountDetails, token){
-        var response = {
-            code : 200
-        };
-
-        var auth = authenticate(username, token);
-
-        if(auth.code === 200){
-
-            var userDetails = Database.getUser(username);
-
-            if(userDetails !== undefined){
-
-                var accountExsits = false;
-                angular.forEach(userDetails.accounts, function(account, value){
-                    if(accountDetails.type === account.type && accountDetails.username === account.username){
-                        accountExsits = true;
-                    }
-                });
-                
-                if(!accountExsits){
-                    response.code = 400;
-                    response.error = 'Nothing to delete, Account does not exists';
-                }else{
-                    // Account details must contain a type and username
-                    Database.removeAccount(username, accountDetails);
-                }
-            }else{
-                response.code = 400;
-                response.error = 'user was not found';
-            }
-
-        }else{
-            return auth;
-        }
-
-        return response;
-    }
 
     // Connect to instagram account 
     function connectInstagram(username){
@@ -246,8 +167,6 @@ app.factory('MiddlewareApi', function(Database, $http, $q, $log){
         signUp : signUp,
         authenticate : authenticate,
         updateSettings : updateSettings,
-        addAccount : addAccount,
-        removeAccount : removeAccount,
         connectInstagram : connectInstagram
     };
 

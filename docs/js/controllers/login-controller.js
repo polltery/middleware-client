@@ -68,7 +68,7 @@ app.controller('login-controller', function($scope, $location, $rootScope, Middl
         if($scope.signupForm.$valid){
 
             // Initiate signup
-            MiddlewareApi.signUp($scope.signupUsername)
+            MiddlewareApi.signUp($scope.signupUsername, $scope.signupPassword)
                 .then(function(data){
 
                     $log.debug(data);

@@ -29,8 +29,10 @@ app.controller('profile-controller', function($scope, $rootScope, $location, Mid
     $scope.profileError = false;
     $scope.profileErrorMessage  = '';
 
-    $scope.twitterAccounts = [];
-    $scope.instagramAccounts = [];
+    $scope.twitter = '';
+    $scope.instagram = '';
+    $scope.hasTwitterAccess = false;
+    $scope.hasInstagramAccess = false;
 
     $scope.searchInput;
 
@@ -43,46 +45,34 @@ app.controller('profile-controller', function($scope, $rootScope, $location, Mid
 
     $scope.addAccountError = false;
     $scope.addAccountErrorMessage = '';
-    $scope.addAccountType = 'twitter';
     $scope.addAccountSuccess = false;
     $scope.addAccountSuccessMessage = '';
-    $scope.accounts = [];
-    $scope.addAccountUsername = '';
 
-    // Check if user has token
-    if(!auth){
-        $scope.changeView('/login');
-    }else{
+    // Get user details
+    MiddlewareApi.getUserDetails($scope.username)
+        .then(function(data){
+            $log.debug(data);
+            if(data.success){
+                // load user variables
+                $scope.description = data.data.details.description;
+                $scope.profilePictureUrl = data.data.details.profilePictureUrl;
+                $scope.theme = data.data.details.theme;
+                $scope.hasTwitterAccess = data.data.details.hasTwitterAccess;
+                $scope.hasInstagramAccess = data.data.details.hasInstagramAccess;
 
-        // Get user details from the server
-        response = MiddlewareApi.getUserDetails($scope.username, $rootScope.token);
-    
-        $log.debug(response);
-
-        if(response.code === 200){
-
-            // load user variables
-            $scope.description = response.data.userDetails.details.description;
-            $scope.profilePictureUrl = response.data.userDetails.details.profilePictureUrl;
-            $scope.theme = response.data.userDetails.details.theme;
-            $scope.accounts = response.data.userDetails.accounts;
-
-            angular.forEach($scope.accounts, function(account, value){
-                if(account.type === 'twitter'){
-                    $scope.twitterAccounts.push(account);
-                }else{
-                    $scope.instagramAccounts.push(account);
+                if($scope.hasTwitterAccess){
+                    // TODO: get twitter data
                 }
-            });
 
-        }else{
+                if($scope.hasInstagramAccess){
+                    // TODO: get instagram data
+                }
+            }else{
+                $scope.profileErrorMessage = data.message;
+            }
+        });
 
-            $scope.profileErrorMessage = response.error;
-
-        }
-
-    }
-
+    // Settings stuff.
     // Enables the save button
     $scope.enableSaveButton = function(){
         $scope.saveButton = '';
@@ -92,25 +82,24 @@ app.controller('profile-controller', function($scope, $rootScope, $location, Mid
     $scope.saveSettings = function(){
 
         if($scope.saveButton !== 'disabled'){
-            settings = {
+            var settings = {
                 description : $scope.description,
                 profilePictureUrl : $scope.profilePictureUrl,
                 theme : $scope.theme
             };
 
-            response = MiddlewareApi.updateSettings($scope.username, settings, $rootScope.token);
-
-            $log.debug(response);
-
-            if(response.code === 200){
-                $scope.settingsSuccess = true;
-                $scope.settingsSuccessMessage = 'Settings updated successfully';
-            }else{
-                $scope.settingsError = true;
-                $scope.settingsErrorMessage = response.error;
+            MiddlewareApi.updateSettings($scope.username, settings)
+                .then(function(data){
+                    $log.debug(data);
+                    if(data.success){
+                        $scope.settingsSuccess = true;
+                        $scope.settingsSuccessMessage = 'Settings updated successfully';
+                    }else{
+                        $scope.settingsError = true;
+                        $scope.settingsErrorMessage = response.error;
+                    }
+                });
             }
-        }
-
     };
 
     // On close of error and success section

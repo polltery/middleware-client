@@ -28,14 +28,18 @@ app.config(function($routeProvider, $sceDelegateProvider) {
         templateUrl : "views/profile.html",
         controller: "profile-controller",
         resolve : {
-            auth : function($rootScope, MiddlewareApi, $route, $log){
-                    response = MiddlewareApi.authenticate($route.current.params.username,$rootScope.token);
-                    $log.debug(response);
-                    if(response.code === 200){
-                        return true;
-                    }else{
-                        return false;
-                    }
+            auth : function(MiddlewareApi, $route, $log, $q){
+                    var deferred = $q.defer();
+                    MiddlewareApi.authenticate($route.current.params.username)
+                        .then(function(data){
+                            $log.debug(data);
+                            if(data.success){
+                                deferred.resolve(data);
+                            }else{
+                                deferred.reject(data);
+                            }
+                        });
+                    return deferred.promise;
                 }
             }
     })
@@ -44,21 +48,25 @@ app.config(function($routeProvider, $sceDelegateProvider) {
         templateUrl : "views/settings.html",
         controller: "profile-controller",
         resolve : {
-            auth : function($rootScope, MiddlewareApi, $route, $log){
-                    response = MiddlewareApi.authenticate($route.current.params.username,$rootScope.token);
-                    $log.debug(response);
-                    if(response.code === 200){
-                        return true;
-                    }else{
-                        return false;
-                    }
+            auth : function(MiddlewareApi, $route, $log, $q){
+                    var deferred = $q.defer();
+                    MiddlewareApi.authenticate($route.current.params.username)
+                        .then(function(data){
+                            $log.debug(data);
+                            if(data.success){
+                                deferred.resolve(data);
+                            }else{
+                                deferred.reject();
+                            }
+                        });
+                    return deferred.promise;
                 }
             }
     })
     
     .when("/:access_token",{
         resolve : {
-            catchToken : function($log, $route, $location){
+            catchToken : function($log, $route, $location, $http, $q){
                 // apply regex on string to get the token
                 var instagramAccessToken = $route.current.params.access_token.split(/access_token=/i);
                 // String is split, and token is stored in instagramAccessToken[1]

@@ -48,7 +48,7 @@ Created on : 13/01/2017
                   <h3 class="page-header">Twitter</h3>
 
                   <!-- error for twitter accounts-->
-                  <div class="well well-lg well-danger" data-ng-if="twitterAccounts.length === 0">
+                  <div class="well well-lg well-danger" data-ng-if="!hasTwitterAccess">
                         <h3 class="text-center">
                               Oops! no linked accout :(
                         </h3>
@@ -56,20 +56,19 @@ Created on : 13/01/2017
                   </div>
 
                   <!--feeds-->
-                  <div data-ng-if="twitterAccounts.length > 0">
+                  <div data-ng-if="twitter.feed.length > 0">
                         <!-- error for twitter accounts feeds-->
-                        <div class="well well-lg well-danger" data-ng-if="!twitterAccounts[0].feeds">
+                        <div class="well well-lg well-danger" data-ng-if="!twitter.feed">
                               <h3 class="text-center">
                                     Your feed is empty :(
                               </h3>
-                              <p class="text-center">Please go to your Twitter account to post something</p>
                         </div>
                   
-                        <div data-ng-if="twitterAccounts[0].feeds.length > 0" class="scroll-content">
+                        <div data-ng-if="twitter.feed.length > 0" class="scroll-content">
                               <!--repeat of feeds-->
-                              <div class="panel panel-primary" data-ng-repeat="feed in twitterAccounts[0].feeds | filter:{tweet : searchInput}">
+                              <div class="panel panel-primary" data-ng-repeat="feed in twitter.feed | filter:{tweet : searchInput}">
                                     <div class="panel-heading">
-                                          <h3 class="panel-title">{{twitterAccounts[0].username}}</h3>
+                                          <h3 class="panel-title">{{feed.username}}</h3>
                                     </div>
                                     <div class="panel-body">
                                           <p>{{feed.tweet}}</p>
@@ -102,7 +101,7 @@ Created on : 13/01/2017
                   <h3 class="page-header">Instagram</h3>
 
                   <!-- error for instagram accounts-->
-                  <div class="well well-lg well-danger" data-ng-if="instagramAccounts.length === 0">
+                  <div class="well well-lg well-danger" data-ng-if="!hasInstagramAccess">
                         <h3 class="text-center">
                               Oops! no linked accout :(
                         </h3>
@@ -110,20 +109,20 @@ Created on : 13/01/2017
                   </div>
 
                   <!--feeds-->
-                  <div data-ng-if="instagramAccounts.length > 0">
+                  <div data-ng-if="instagram.feed.length > 0">
                         <!-- error for twitter accounts feeds-->
-                        <div class="well well-lg well-danger" data-ng-if="!instagramAccounts[0].feeds">
+                        <div class="well well-lg well-danger" data-ng-if="!instagram.feed">
                               <h3 class="text-center">
                                     Your feed is empty :(
                               </h3>
                               <p class="text-center">Please go to your Instagram account to post something</p>
                         </div>
 
-                        <div data-ng-if="instagramAccounts[0].feeds.length > 0" class="scroll-content">
+                        <div data-ng-if="instagram.feed.length > 0" class="scroll-content">
                               <!--repeat of feeds-->
-                              <div class="panel panel-success" data-ng-repeat="feed in instagramAccounts[0].feeds | filter:{caption : searchInput}">
+                              <div class="panel panel-success" data-ng-repeat="feed in instagram.feed | filter:{caption : searchInput}">
                                     <div class="panel-heading">
-                                          <h3 class="panel-title">{{instagramAccounts[0].username}}</h3>
+                                          <h3 class="panel-title">{{feed.username}}</h3>
                                     </div>
                                     <div class="panel-body">
                                           <img data-ng-if="feed.type === 'image'" data-ng-src="{{feed.source}}" alt="{{feed.caption}}" class="img-responsive center-block img-rounded">
