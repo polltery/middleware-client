@@ -83,12 +83,14 @@ Created on : 13/01/2017
   <!-- Instagram and twitter buttons go here -->
   <div class="row">
     <div class="col-sm-6">
-      <input type="text" class="form-control" id="twitterUsername" placeholder="Twitter Username">
-      <button type="button" class="btn btn-block btn-default" data-ng-click="connectTwitter()">Connect to twitter</button>
+      <input data-ng-if="!hasTwitterAccess" type="text" class="form-control" id="twitterUsername" placeholder="Twitter Username">
+      <button data-ng-if="!hasTwitterAccess" type="button" class="btn btn-block btn-default" data-ng-click="connectTwitter()">Connect to twitter</button>
+      <button data-ng-if="hasTwitterAccess" type="button" class="btn btn-block btn-success" data-ng-click="connectTwitter()">Connected to twitter</button>
     </div>
     <div class="col-sm-6">
       <p><i>No username required for Instagram</i></p>
-      <button type="button" class="btn btn-block btn-default" data-ng-click="connectInstagram()">Connect to Instagram</button>
+      <button data-ng-if="!hasInstagramAccess" type="button" class="btn btn-block btn-default" data-ng-click="connectInstagram()">Connect to Instagram</button>
+      <button data-ng-if="hasInstagramAccess" type="button" class="btn btn-block btn-success">Connected to Instagram</button>
     </div>
   </div>
 
