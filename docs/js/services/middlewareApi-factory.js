@@ -219,6 +219,26 @@ app.factory('MiddlewareApi', function($http, $q, $log){
         return deferred.promise;
     }
 
+    // gets twitter feed stored in the middleware
+    function getTwitterFeed(username){
+        var deferred = $q.defer();
+
+        // Get token
+        var token = window.sessionStorage.getItem("socialHubUserToken");
+
+        var url = API+'/getTwitterFeed/'+twitterUsername+'?token='+token;
+
+        $http.get(url)
+            .success(function(data){
+                deferred.resolve(data);
+            })
+            .error(function(data){
+                deferred.reject(data);
+            });
+
+        return deferred.promise;
+    }
+
     return {
         getUserDetails : getUserDetails,
         login : login,
