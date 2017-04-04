@@ -118,7 +118,17 @@ app.controller('profile-controller', function($scope, $rootScope, $location, Mid
 
     // Connect twitter account
     $scope.connectTwitter = function(){
-
+        MiddlewareApi.authorizeTwitter($scope.username, $scope.twitterUsername)
+            .then(function(data){
+                $log.debug(data);
+                if(data.success){
+                    $scope.addAccountSuccess = true;
+                    $scope.addAccountSuccessMessage = "Your Twitter account was successfully connected!";
+                }else{
+                    $scope.addAccountError = true;
+                    $scope.addAccountErrorMessage = "Your Twitter account failed to connect.";
+                }
+            });
     };
 
     // Connect Instagram account
@@ -155,7 +165,7 @@ app.controller('profile-controller', function($scope, $rootScope, $location, Mid
 
     // Show failed message if Instagram Auth was a failure
     if($routeParams.authSuccess === 'instagramFailed'){
-        $scope.addAccountErrorMessage = "Your Instagram account failed to connected!";
+        $scope.addAccountErrorMessage = "Your Instagram account failed to connect!";
         $scope.addAccountError = true;
     }
 
