@@ -179,7 +179,7 @@ app.factory('MiddlewareApi', function($http, $q, $log){
         var token = window.sessionStorage.getItem("socialHubUserToken");
 
         var payload = {
-            instagramToken : instagramToken
+            instagram_access_token : instagramToken
         };
 
         var url = API+'/authorizeInstagram/'+username+'?token='+token;
@@ -203,10 +203,10 @@ app.factory('MiddlewareApi', function($http, $q, $log){
         var token = window.sessionStorage.getItem("socialHubUserToken");
 
         var payload = {
-            twitterUsername : twitterUsername
+            twitter_username : twitterUsername
         };
 
-        var url = API+'/authorizeInstagram/'+username+'?token='+token;
+        var url = API+'/authorizeTwitter/'+username+'?token='+token;
 
         $http.post(url, JSON.stringify(payload))
             .success(function(data){
@@ -226,7 +226,27 @@ app.factory('MiddlewareApi', function($http, $q, $log){
         // Get token
         var token = window.sessionStorage.getItem("socialHubUserToken");
 
-        var url = API+'/getTwitterFeed/'+twitterUsername+'?token='+token;
+        var url = API+'/getTwitterFeed/'+username+'?token='+token;
+
+        $http.get(url)
+            .success(function(data){
+                deferred.resolve(data);
+            })
+            .error(function(data){
+                deferred.reject(data);
+            });
+
+        return deferred.promise;
+    }
+
+        // gets twitter feed stored in the middleware
+    function getInstagramFeed(username){
+        var deferred = $q.defer();
+
+        // Get token
+        var token = window.sessionStorage.getItem("socialHubUserToken");
+
+        var url = API+'/getInstagramFeed/'+username+'?token='+token;
 
         $http.get(url)
             .success(function(data){
@@ -246,6 +266,10 @@ app.factory('MiddlewareApi', function($http, $q, $log){
         authenticate : authenticate,
         updateSettings : updateSettings,
         connectInstagram : connectInstagram,
+        authorizeInstagram : authorizeInstagram,
+        authorizeTwitter : authorizeTwitter,
+        getTwitterFeed : getTwitterFeed,
+        getInstagramFeed : getInstagramFeed,
         logout: logout
     };
 
