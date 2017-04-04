@@ -65,6 +65,11 @@ app.controller('profile-controller', function($scope, $rootScope, $location, Mid
                 }
 
                 if($scope.hasInstagramAccess){
+                    // Show success message if Instagram Auth was a success
+                    if($routeParams.authSuccess === 'instagramSuccess'){
+                        $scope.addAccountSuccessMessage = "Your Instagram account was successfully connected!";
+                        $scope.addAccountSuccess = true;
+                    }
                     // TODO: get instagram data
                 }
             }else{
@@ -147,5 +152,12 @@ app.controller('profile-controller', function($scope, $rootScope, $location, Mid
             });
 
     };
+
+    // Show failed message if Instagram Auth was a failure
+    if($routeParams.authSuccess === 'instagramFailed'){
+        $scope.addAccountErrorMessage = "Your Instagram account failed to connected!";
+        $scope.addAccountError = true;
+    }
+
   
 });
