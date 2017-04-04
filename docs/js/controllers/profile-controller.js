@@ -33,7 +33,7 @@ app.controller('profile-controller', function($scope, $rootScope, $location, Mid
     $scope.instagram = '';
     $scope.hasTwitterAccess = false;
     $scope.hasInstagramAccess = false;
-
+    $scope.connectTwitterButton = 'disabled';
     $scope.searchInput;
 
     // Settings page variables
@@ -118,19 +118,26 @@ app.controller('profile-controller', function($scope, $rootScope, $location, Mid
         $scope.settingsSuccess = false;
     };
 
+    // Enable twitter button
+    $scope.enableTwitterConnectButton = function(){
+        $scope.connectTwitterButton = '';
+    };
+
     // Connect twitter account
     $scope.connectTwitter = function(){
-        MiddlewareApi.authorizeTwitter($scope.username, $scope.twitterUsername)
-            .then(function(data){
-                $log.debug(data);
-                if(data.success){
-                    $scope.addAccountSuccess = true;
-                    $scope.addAccountSuccessMessage = "Your Twitter account was successfully connected!";
-                }else{
-                    $scope.addAccountError = true;
-                    $scope.addAccountErrorMessage = "Your Twitter account failed to connect.";
-                }
-            });
+        if($scope.connectTwitterButton !== 'disabled'){
+            MiddlewareApi.authorizeTwitter($scope.username, $scope.twitterUsername)
+                .then(function(data){
+                    $log.debug(data);
+                    if(data.success){
+                        $scope.addAccountSuccess = true;
+                        $scope.addAccountSuccessMessage = "Your Twitter account was successfully connected!";
+                    }else{
+                        $scope.addAccountError = true;
+                        $scope.addAccountErrorMessage = "Your Twitter account failed to connect.";
+                    }
+                });
+        }
     };
 
     // Connect Instagram account
