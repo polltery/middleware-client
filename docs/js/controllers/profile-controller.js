@@ -90,7 +90,9 @@ app.controller('profile-controller', function($scope, $rootScope, $location, Mid
             var settings = {
                 description : $scope.description,
                 profilePictureUrl : $scope.profilePictureUrl,
-                theme : $scope.theme
+                theme : $scope.theme,
+                hasInstagramAccess : $scope.hasInstagramAccess,
+                hasTwitterAccess : $scope.hasTwitterAccess
             };
 
             MiddlewareApi.updateSettings($scope.username, settings)
