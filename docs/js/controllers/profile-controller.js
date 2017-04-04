@@ -29,8 +29,8 @@ app.controller('profile-controller', function($scope, $rootScope, $location, Mid
     $scope.profileError = false;
     $scope.profileErrorMessage  = '';
 
-    $scope.twitter = '';
-    $scope.instagram = '';
+    $scope.twitter = {};
+    $scope.instagram = {};
     $scope.hasTwitterAccess = false;
     $scope.hasInstagramAccess = false;
     $scope.connectTwitterButton = 'disabled';
@@ -61,7 +61,17 @@ app.controller('profile-controller', function($scope, $rootScope, $location, Mid
                 $scope.hasInstagramAccess = data.data.details.hasInstagramAccess;
 
                 if($scope.hasTwitterAccess){
-                    // TODO: get twitter data
+                    // Get twitter data
+                    MiddlewareApi.getTwitterFeed($scope.username)
+                        .then(function(data){
+                            $log.debug(data);
+                            if(data.success){
+                                $scope.twitter.feed = data.data;
+                            }else{
+                                $scope.profileError = true;
+                                $scope.profileErrorMessage = "Unable to retrive your tweets";
+                            }
+                        });
                 }
 
                 if($scope.hasInstagramAccess){
@@ -70,7 +80,17 @@ app.controller('profile-controller', function($scope, $rootScope, $location, Mid
                         $scope.addAccountSuccessMessage = "Your Instagram account was successfully connected!";
                         $scope.addAccountSuccess = true;
                     }
-                    // TODO: get instagram data
+                    // Get instagram data
+                    MiddlewareApi.getInstagramFeed($scope.username)
+                        .then(function(data){
+                            $log.debug(data);
+                            if(data.success){
+                                $scope.instagram.feed = data.feed;
+                            }else{
+                                $scope.profileError = true;
+                                $scope.profileErrorMessage = "Unable to retrive your Instagram media";
+                            }
+                        });
                 }
             }else{
                 $scope.profileErrorMessage = data.message;

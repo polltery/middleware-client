@@ -68,7 +68,7 @@ Created on : 13/01/2017
                               <!--repeat of feeds-->
                               <div class="panel panel-primary" data-ng-repeat="feed in twitter.feed | filter:{tweet : searchInput}">
                                     <div class="panel-heading">
-                                          <h3 class="panel-title">{{feed.username}}</h3>
+                                          <h3 class="panel-title">{{feed.user}}</h3>
                                     </div>
                                     <div class="panel-body">
                                           <p>{{feed.tweet}}</p>
@@ -110,19 +110,18 @@ Created on : 13/01/2017
 
                   <!--feeds-->
                   <div data-ng-if="instagram.feed.length > 0">
-                        <!-- error for twitter accounts feeds-->
+                        <!-- error for instagram accounts feeds-->
                         <div class="well well-lg well-danger" data-ng-if="!instagram.feed">
                               <h3 class="text-center">
                                     Your feed is empty :(
                               </h3>
-                              <p class="text-center">Please go to your Instagram account to post something</p>
                         </div>
 
                         <div data-ng-if="instagram.feed.length > 0" class="scroll-content">
                               <!--repeat of feeds-->
                               <div class="panel panel-success" data-ng-repeat="feed in instagram.feed | filter:{caption : searchInput}">
                                     <div class="panel-heading">
-                                          <h3 class="panel-title">{{feed.username}}</h3>
+                                          <h3 class="panel-title">{{feed.user}}</h3>
                                     </div>
                                     <div class="panel-body">
                                           <img data-ng-if="feed.type === 'image'" data-ng-src="{{feed.source}}" alt="{{feed.caption}}" class="img-responsive center-block img-rounded">
