@@ -33,6 +33,23 @@ describe('Middleware login page: ', function(){
     });
   });
 
+    //Description of this test
+  it('Should signup in a new user', function(){
+
+    // Browser gets the given url
+    browser.get(url+'/index.html#/login');
+
+    // Set the form variables (example, example) is already set
+    element(by.model('signupUsername')).sendKeys('automatedTestUser');
+    element(by.model('signupPassword')).sendKeys('password');
+
+    // Check function below for details
+    waitForButtonClickableThenClick('signup-submit');
+
+    // Expect the browser to go to user profile
+    expect(browser.getCurrentUrl()).toEqual(url+'/index.html#/profile/automatedTestUser'); 
+
+  });
 
   //Description of this test
   it('Should log in a registered user', function(){
@@ -41,36 +58,16 @@ describe('Middleware login page: ', function(){
     browser.get(url+'/index.html#/login');
 
     // Set the form variables (example, example) is already set
-    element(by.model('loginUsername')).sendKeys('example');
-    element(by.model('loginPassword')).sendKeys('example');
+    element(by.model('loginUsername')).sendKeys('automatedTestUser');
+    element(by.model('loginPassword')).sendKeys('password');
 
     // Check function below for details
     waitForButtonClickableThenClick('login-submit');
 
     // Expect the browser to go to user profile
-    expect(browser.getCurrentUrl()).toEqual(url+'/index.html#/profile/example'); 
+    expect(browser.getCurrentUrl()).toEqual(url+'/index.html#/profile/automatedTestUser'); 
 
   });
-
-    //Description of this test
-  it('Should signup in a new user', function(){
-
-    // Browser gets the given url
-    browser.get(url+'/index.html#/login');
-
-    // Set the form variables (example, example) is already set
-    element(by.model('signupUsername')).sendKeys('newExample');
-    element(by.model('signupPassword')).sendKeys('example');
-
-    // Check function below for details
-    waitForButtonClickableThenClick('signup-submit');
-
-    // Expect the browser to go to user profile
-    expect(browser.getCurrentUrl()).toEqual(url+'/index.html#/profile/newExample'); 
-
-  });
-
-
 
   //Description of this test
   it('Should not signup if username or password are invalid', function(){
