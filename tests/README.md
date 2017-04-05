@@ -42,7 +42,7 @@ Project Structure
 How to run a test?
 ---
 
-**NOTE: Please make sure ```example``` user is already in the MongoDB database with password ```password``` and the mule server is running along with mongoDB.**
+**NOTE: Please make sure the database is empty, you can do this by ```db.users.drop();```**
 
 Make sure you have the server running. You can start the server using this command.
 ```
