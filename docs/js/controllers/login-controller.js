@@ -58,6 +58,10 @@ app.controller('login-controller', function($scope, $location, $rootScope, Middl
                         $scope.loginErrorMessage = data.message;
                     }
 
+                }).catch(function(data){
+                    // Show error message
+                    $scope.loginError = true;
+                    $scope.loginErrorMessage = 'Internal error, please try again later.';
                 });
         }
     };
@@ -107,6 +111,10 @@ app.controller('login-controller', function($scope, $location, $rootScope, Middl
                         $scope.signupErrorMessage = data.message;
                     }
 
+                }).catch(function(data){
+                    // Show error message
+                    $scope.signupError = true;
+                    $scope.signupErrorMessage = 'Internal error, please try again later.';
                 });
 
         }

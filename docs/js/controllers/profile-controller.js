@@ -71,6 +71,10 @@ app.controller('profile-controller', function($scope, $rootScope, $location, Mid
                                 $scope.profileError = true;
                                 $scope.profileErrorMessage = "Unable to retrive your tweets";
                             }
+                        }).catch(function(data){
+                            // Show error message
+                            $scope.profileError = true;
+                            $scope.profileErrorMessage = 'Internal error, please try again later.';
                         });
                 }
 
@@ -90,11 +94,20 @@ app.controller('profile-controller', function($scope, $rootScope, $location, Mid
                                 $scope.profileError = true;
                                 $scope.profileErrorMessage = "Unable to retrive your Instagram media";
                             }
+                        }).catch(function(data){
+                            // Show error message
+                            $scope.profileError = true;
+                            $scope.profileErrorMessage = 'Internal error, please try again later.';
                         });
                 }
             }else{
+                $scope.profileError = true;
                 $scope.profileErrorMessage = data.message;
             }
+        }).catch(function(data){
+            // Show error message
+            $scope.profileError = true;
+            $scope.profileErrorMessage = 'Internal error, please try again later.';
         });
 
     // Settings stuff.
@@ -125,6 +138,10 @@ app.controller('profile-controller', function($scope, $rootScope, $location, Mid
                         $scope.settingsError = true;
                         $scope.settingsErrorMessage = response.error;
                     }
+                }).catch(function(data){
+                    // Show error message
+                    $scope.settingsError = true;
+                    $scope.settingsErrorMessage = 'Internal error, please try again later.';
                 });
             }
     };
@@ -157,6 +174,10 @@ app.controller('profile-controller', function($scope, $rootScope, $location, Mid
                         $scope.addAccountError = true;
                         $scope.addAccountErrorMessage = "Your Twitter account failed to connect.";
                     }
+                }).catch(function(data){
+                    // Show error message
+                    $scope.addAccountError = true;
+                    $scope.addAccountErrorMessage = 'Internal error, please try again later.';
                 });
         }
     };
@@ -189,6 +210,10 @@ app.controller('profile-controller', function($scope, $rootScope, $location, Mid
                     $scope.profileError = true;
                     $scope.profileErrorMessage = data.errorMessage;
                 }
+            }).catch(function(data){
+                // Show error message
+                $scope.addAccountError = true;
+                $scope.addAccountErrorMessage = 'Internal error, please try again later.';
             });
 
     };
