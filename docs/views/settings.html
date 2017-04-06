@@ -92,7 +92,7 @@ Created on : 13/01/2017
     
     </div>
     <div class="col-sm-6">
-      <p><i>No username required for Instagram</i></p>
+      <p data-ng-if="!hasInstagramAccess"><i>No username required for Instagram</i></p>
       <button data-ng-if="!hasInstagramAccess" type="button" class="btn btn-block btn-default" data-ng-click="connectInstagram()">Connect to Instagram</button>
       <button data-ng-if="hasInstagramAccess" type="button" class="btn btn-block btn-success">Connected to Instagram</button>
     </div>

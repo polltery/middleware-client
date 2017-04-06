@@ -150,6 +150,7 @@ app.controller('profile-controller', function($scope, $rootScope, $location, Mid
                 .then(function(data){
                     $log.debug(data);
                     if(data.success){
+                        $scope.hasTwitterAccess = true;
                         $scope.addAccountSuccess = true;
                         $scope.addAccountSuccessMessage = "Your Twitter account was successfully connected!";
                     }else{
