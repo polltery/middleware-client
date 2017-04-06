@@ -18,7 +18,7 @@ app.factory('MiddlewareApi', function($http, $q, $log){
         // Get token
         var token = window.sessionStorage.getItem("socialHubUserToken");
 
-        var url = API+'/userDetails/'+username+'?token='+token;
+        var url = API+'/userDetails/'+username+'?token='+encodeURIComponent(token);
 
         $http.get(url)
             .success(function(data){
@@ -115,7 +115,7 @@ app.factory('MiddlewareApi', function($http, $q, $log){
         // Get token
         var token = window.sessionStorage.getItem("socialHubUserToken");
 
-        var url = API+'/userDetails/'+username+'?token='+token;
+        var url = API+'/userDetails/'+username+'?token='+encodeURIComponent(token);
 
         $http.put(url, JSON.stringify(payload))
             .success(function(data){
@@ -226,7 +226,7 @@ app.factory('MiddlewareApi', function($http, $q, $log){
         // Get token
         var token = window.sessionStorage.getItem("socialHubUserToken");
 
-        var url = API+'/getTwitterFeed/'+username+'?token='+token;
+        var url = API+'/getTwitterFeed/'+username+'?token='+encodeURIComponent(token);
 
         $http.get(url)
             .success(function(data){
@@ -246,7 +246,7 @@ app.factory('MiddlewareApi', function($http, $q, $log){
         // Get token
         var token = window.sessionStorage.getItem("socialHubUserToken");
 
-        var url = API+'/getInstagramFeed/'+username+'?token='+token;
+        var url = API+'/getInstagramFeed/'+username+'?token='+encodeURIComponent(token);
 
         $http.get(url)
             .success(function(data){
