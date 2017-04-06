@@ -120,8 +120,18 @@ Created on : 13/01/2017
                                           <h3 class="panel-title">{{feed.user}}</h3>
                                     </div>
                                     <div class="panel-body">
+                                          <!--image-->
                                           <img data-ng-if="feed.type === 'image'" data-ng-src="{{feed.source}}" alt="{{feed.caption}}" class="img-responsive center-block img-rounded">
+                                          <!--Video-->
+                                          <div data-ng-if="feed.type === 'video'" align="center" class="embed-responsive embed-responsive-16by9">
+                                          <video  controls  class="embed-responsive-item">
+                                          <source data-ng-src="{{feed.source}}" type="video/mp4">
+                                          </video>
+                                          
+                                          </div>
+                                          
                                           <p>{{feed.caption}}</p>
+                                          
                                           <div>
                                                 <p class="pull-left">
                                                 <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>&nbsp;{{feed.likes}}

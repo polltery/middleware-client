@@ -95,7 +95,8 @@ app.config(function($routeProvider, $sceDelegateProvider) {
         // Allow same origin resource loads.
         'self',
         // Allow loading from our assets domain.  Notice the difference between * and **.
-        'http://techslides.com/demos/sample-videos/**'
+        'http://techslides.com/demos/sample-videos/**',
+        'https://scontent.cdninstagram.com/**'
     ]);
 
 
