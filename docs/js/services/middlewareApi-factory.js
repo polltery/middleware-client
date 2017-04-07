@@ -182,7 +182,7 @@ app.factory('MiddlewareApi', function($http, $q, $log){
             instagram_access_token : instagramToken
         };
 
-        var url = API+'/authorizeInstagram/'+username+'?token='+token;
+        var url = API+'/authorizeInstagram/'+username+'?token='+encodeURIComponent(token);
 
         $http.post(url, JSON.stringify(payload))
             .success(function(data){
@@ -206,7 +206,7 @@ app.factory('MiddlewareApi', function($http, $q, $log){
             twitter_username : twitterUsername
         };
 
-        var url = API+'/authorizeTwitter/'+username+'?token='+token;
+        var url = API+'/authorizeTwitter/'+username+'?token='+encodeURIcomponent(token);
 
         $http.post(url, JSON.stringify(payload))
             .success(function(data){
